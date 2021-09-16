@@ -1,0 +1,5 @@
+C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Console\obj\Debug\net5.0\GranjaAvicola.App.Console.csproj.AssemblyReference.cache
+C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Console\obj\Debug\net5.0\GranjaAvicola.App.Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Console\obj\Debug\net5.0\GranjaAvicola.App.Console.AssemblyInfoInputs.cache
+C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Console\obj\Debug\net5.0\GranjaAvicola.App.Console.AssemblyInfo.cs
+C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Console\obj\Debug\net5.0\GranjaAvicola.App.Console.csproj.CoreCompileInputs.cache

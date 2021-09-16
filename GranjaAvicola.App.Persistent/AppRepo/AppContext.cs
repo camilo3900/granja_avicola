@@ -1,9 +1,19 @@
 using Microsoft.EntityFrameworkCore;
+using GranjaAvicola.App.Domain;
 
 namespace GranjaAvicola.App.Persistent
 {
-    public class AppContext : DBContext
+    public class AppContext : DbContext
     {
-        public Dbset<Persona> Personas {get;set;}
+        public DbSet<Persona> Persona {get;set;}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder OptionsBuilder)
+        {
+            if(!OptionsBuilder.IsConfigured)
+            {
+                OptionsBuilder
+                .UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = GranjaAvicola.data");
+            }
+        }
     }
 }
