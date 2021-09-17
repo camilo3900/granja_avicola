@@ -1,6 +1,6 @@
 namespace GranjaAvicola.App.Domain
 {
-    public enum Genero
+    public enum genero
     {
         Masculino,
         Femenino,

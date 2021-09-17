@@ -10,3 +10,15 @@ C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Domain\obj\Debug\net5.0\
 C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.dll
 C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Domain\obj\Debug\net5.0\ref\GranjaAvicola.App.Domain.dll
 C:\Users\Migue\Desktop\Granja_Avicola\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.pdb
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.csproj.AssemblyReference.cache
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.AssemblyInfoInputs.cache
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.AssemblyInfo.cs
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.csproj.CoreCompileInputs.cache
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.dll
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\ref\GranjaAvicola.App.Domain.dll
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\obj\Debug\net5.0\GranjaAvicola.App.Domain.pdb
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\bin\Debug\net5.0\GranjaAvicola.App.Domain.deps.json
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\bin\Debug\net5.0\GranjaAvicola.App.Domain.dll
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\bin\Debug\net5.0\ref\GranjaAvicola.App.Domain.dll
+C:\Users\57312\Documents\GitHub\GranjaAvicola.App\GranjaAvicola.App.Domain\bin\Debug\net5.0\GranjaAvicola.App.Domain.pdb
