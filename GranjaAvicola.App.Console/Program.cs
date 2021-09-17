@@ -7,7 +7,7 @@ namespace GranjaAvicola.App.Console
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World! Entity Fremework");
+            System.Console.WriteLine("Hello World! Entity Fremework");
         }
     }
 }
