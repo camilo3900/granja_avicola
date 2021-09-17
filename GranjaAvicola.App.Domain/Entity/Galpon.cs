@@ -6,9 +6,9 @@ namespace GranjaAvicola.App.Domain
         public int Georeferencia {get; set;}
         public int ID_OperarioCargo {get; set;}
         public int ID_VeterinarioCargo {get; set;}
-        public String Nombre {get; set;}
+        public string Nombre {get; set;}
         public int NumeroAnimales {get; set;}
-        public String FechaIngreso {get; set;}
-        public String FechaSalida {get; set;}
+        public string FechaIngreso {get; set;}
+        public string FechaSalida {get; set;}
     }
 }

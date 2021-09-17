@@ -6,7 +6,7 @@ namespace GranjaAvicola.App.Domain
         public string Apellido {get;set;}
         public int Telefono {get;set;}
         public string Correo {get;set;}
-        public genero Genero {get; set;}
+        public Genero Genero {get; set;}
     }
     
 }
