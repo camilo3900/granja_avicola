@@ -17,6 +17,7 @@ namespace GranjaAvicola.App.Persistent
             {
                 OptionsBuilder
                 /*
+                [Angel/Diseñador de Software] 17/09/2021
                 Aqui el DataSource es el nombre de la base de datos local recuerden cambiarlo siempre que vayan a realizar pruebas localmente
                     Data Sources de cada maquina:
                         Juan Pablo : [Por escribir]  
@@ -24,8 +25,21 @@ namespace GranjaAvicola.App.Persistent
                         Miguel : (localdb)\\MSSQLLocalDB
                         Angel : LAPTOP-VPO7HRDD\\SQLEXPRESS
                 */
-                .UseSqlServer("Initial Catalog = ParkingApp.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
+                .UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
             }
+        }
+        
+        /*
+        [Angel/Diseñador de Software] 17/09/2021
+        Esta sentencia es para configurar el modelo que se está creando por ahora solo dejar todas las entidades con un HasNokey() para que
+        No genere errores el Entity Framework :)
+        */
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Galpon>().HasNoKey();
+            modelBuilder.Entity<Georeferencias>().HasNoKey();
+            modelBuilder.Entity<Persona>().HasNoKey();
+            //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
         }
     }
 }
