@@ -8,6 +8,9 @@ namespace GranjaAvicola.App.Persistent
         public DbSet<Galpon> Galpon {get;set;}
         public DbSet<Georeferencias> Georeferencias {get; set;}
         public DbSet<Persona> Persona{get;set;}
+        public DbSet<Rol> Rol{get;set;}
+        public DbSet<Registro> Registro{get;set;}
+        public DbSet<Diagnostico> Diagnostico{get;set;}
 
         //TODO: Faltan las implementaciones de las entidades registros y Diagnostico 
 
@@ -39,6 +42,9 @@ namespace GranjaAvicola.App.Persistent
             modelBuilder.Entity<Galpon>().HasNoKey();
             modelBuilder.Entity<Georeferencias>().HasNoKey();
             modelBuilder.Entity<Persona>().HasNoKey();
+            modelBuilder.Entity<Registro>().HasNoKey();
+            modelBuilder.Entity<Rol>().HasNoKey();
+            modelBuilder.Entity<Diagnostico>().HasNoKey();
             //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
         }
     }
