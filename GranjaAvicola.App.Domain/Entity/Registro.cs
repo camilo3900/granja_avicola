@@ -1,10 +1,11 @@
+using System;
 namespace GranjaAvicola.App.Domain
 {
-    public class Historia 
+    public class Registro 
     {
         public int ID_Registro {get; set;}
         public int ID_Galpon {get; set;}
-        public string FechaRegistro {get; set;}
+        public DateTime FechaRegistro {get; set;}
         public double Temperatura {get; set;}
         public double Agua {get; set;}
         public double Alimento {get; set;}
