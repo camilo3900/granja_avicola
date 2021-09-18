@@ -1,3 +1,4 @@
+using System;
 namespace GranjaAvicola.App.Domain
 {
     public class Galpon
@@ -8,7 +9,7 @@ namespace GranjaAvicola.App.Domain
         public int ID_VeterinarioCargo {get; set;}
         public string Nombre {get; set;}
         public int NumeroAnimales {get; set;}
-        public string FechaIngreso {get; set;}
-        public string FechaSalida {get; set;}
+        public DateTime FechaIngreso {get; set;}
+        public DateTime FechaSalida {get; set;}
     }
 }
