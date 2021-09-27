@@ -40,20 +40,17 @@ main {
   background-color: var(--bg-primary);
   transition: width 600ms ease;
   overflow: scroll;
-}
-
-#sidebar::-webkit-scrollbar {
-  width: 0px ;
-}
-
-.navbar-nav {
   list-style: none;
-  padding: 0;
+  padding: 0%;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 0px ;
 }
 
 
@@ -123,11 +120,6 @@ a {
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -176,6 +168,7 @@ body {
     bottom: 0;
     width: 100vw;
     height: 5rem;
+    padding: 0%;
   }
 
   .navbar-nav {
@@ -198,6 +191,7 @@ body {
     top: auto;
     width: 5rem;
     height: 100vh;
+    padding: 0%;
   }
 
   #sidebar:hover {
