@@ -20,9 +20,8 @@
     box-shadow: 7px 13px 37px #000;
   }
   .columnas {
-        
-    display table-cell; 
-    padding 30px;
+    display: table-cell;
+    padding: 30px;
 
 } 
   
