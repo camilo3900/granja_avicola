@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace GranjaAvicola.App.FrontEnd
+namespace GranjaAvicola.App.Frontend
 {
     public class Program
     {

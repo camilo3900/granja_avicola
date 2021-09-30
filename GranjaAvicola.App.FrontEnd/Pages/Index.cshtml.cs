@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace GranjaAvicola.App.FrontEnd.Pages
+namespace GranjaAvicola.App.Frontend.Pages
 {
     public class IndexModel : PageModel
     {

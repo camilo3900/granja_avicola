@@ -1,10 +1,35 @@
 ﻿@page
 @model GranjaAvicola.App.FrontEnd.Pages.RegistroVeterinarioModel
 @{
-    ViewData["Title"] = "Registro Veterinario";
 }
-
 <div class="text-center">
-    <h1 class="display-4">Veterinario</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<header>
+    <h1 class="display-5">Registro de Operario</h1>
+</header>
+<Body>
+    <div class="mb-3 row">
+        <label for="text" class="col-sm-2 col-form-label">Nombre Completo</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control" id="NombreGalpon" value="Nombre">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="text" class="col-sm-2 col-form-label">Telefono</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control" id="NumeroAGalpon" value="Numero De animales">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="text" class="col-sm-2 col-form-label">Genero</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control" id="NumeroAGalpon" value="Numero De animales">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="text" class="col-sm-2 col-form-label">Correo</label>
+        <div class="col-sm-10">
+            <input type="text" readonly class="form-control" id="NumeroAGalpon" value="Numero De animales">
+        </div>
+    <button type="button" class="btn btn-outline-primary">Registrar</button>
+</Body>
 </div>
