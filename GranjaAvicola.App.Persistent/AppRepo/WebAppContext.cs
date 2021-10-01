@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using GranjaAvicola.App.Domain;
+using System.Collections;
 
 namespace GranjaAvicola.App.Persistent
 {
-    public class AppContext : DbContext
+    public class WebAppContext : DbContext
     {
         public DbSet<Galpon> Galpon {get;set;}
         public DbSet<Georeferencias> Georeferencias {get; set;}
@@ -28,7 +29,7 @@ namespace GranjaAvicola.App.Persistent
                         Miguel : (localdb)\\MSSQLLocalDB
                         Angel : LAPTOP-VPO7HRDD\\SQLEXPRESS
                 */
-                .UseSqlServer("Initial Catalog = GranjaAvicola; Data Source=(localdb)\\MSSQLLocalDB; Integrated Security=true");
+                .UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
             }
         }
         
@@ -40,13 +41,18 @@ namespace GranjaAvicola.App.Persistent
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
-             modelBuilder.Entity<Galpon>().HasNoKey();
-             modelBuilder.Entity<Georeferencias>().HasNoKey();
-             modelBuilder.Entity<Persona>().HasNoKey();
-             modelBuilder.Entity<Registro>().HasNoKey();
-             modelBuilder.Entity<Rol>().HasNoKey();
-             modelBuilder.Entity<Diagnostico>().HasNoKey();
-             //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
+             modelBuilder.Entity<Galpon>()
+                .HasKey(ga => ga.ID_Galpon);
+             modelBuilder.Entity<Georeferencias>()
+                .HasKey(ge => ge.Id_Georeferencia);
+             modelBuilder.Entity<Persona>()
+                .HasKey(p => p.Id_Persona);
+             modelBuilder.Entity<Registro>()
+                .HasKey(re => re.Id_Registro);
+             modelBuilder.Entity<Rol>()
+                .HasKey(rol => rol.Id_Rol);
+             modelBuilder.Entity<Diagnostico>()
+                .HasKey(d => d.Id_Diagnostico);
          }
     }
 }

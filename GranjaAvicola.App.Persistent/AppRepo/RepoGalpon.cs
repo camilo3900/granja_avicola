@@ -11,13 +11,13 @@ namespace GranjaAvicola.App.Domain
         /// <summary>
         /// Referencia al contexto de Paciente
         /// </summary>
-        private readonly AppContext _appContext;
+        private readonly WebAppContext _appContext;
         /// <summary>
         /// Metodo Constructor Utiiza 
         /// Inyeccion de dependencias para indicar el contexto a utilizar
         /// </summary>
         /// <param name="appContext"></param>//
-        public RepoGalpon(AppContext appContext)
+        public RepoGalpon(WebAppContext appContext)
         {
             _appContext = appContext;
         }

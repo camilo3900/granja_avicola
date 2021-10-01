@@ -6,7 +6,7 @@ namespace GranjaAvicola.App.Console
 {
     class Program
     {
-        private static IRepoGalpon _repoGalpon = new RepoGalpon(new Persistent.AppContext());
+        private static IRepoGalpon _repoGalpon = new RepoGalpon(new Persistent.WebAppContext());
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
