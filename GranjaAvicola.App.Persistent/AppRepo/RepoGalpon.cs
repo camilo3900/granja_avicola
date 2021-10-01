@@ -21,16 +21,16 @@ namespace GranjaAvicola.App.Domain
         {
             _appContext = appContext;
         }
-        public Galpon AddGalpon(Galpon galpon)
+        Galpon IRepoGalpon.AddGalpon(Galpon galpon)
         {
             var galponAdd = _appContext.Galpon.Add(galpon);
             _appContext.SaveChanges();
             return galponAdd.Entity;
         }
 
-        public void DeleteGalpon(int idGalpon)
+        void IRepoGalpon.DeleteGalpon(int idGalpon)
         {
-            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
+            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.Id == idGalpon);
             if (galponEncontrado == null)
                 return;
             _appContext.Galpon.Remove(galponEncontrado);
@@ -38,20 +38,20 @@ namespace GranjaAvicola.App.Domain
 
         }
 
-        public IEnumerable<Galpon> GetAllGalpon()
+        IEnumerable<Galpon> IRepoGalpon.GetAllGalpon()
         {
             return _appContext.Galpon;
         }
 
-        public Galpon GetGalpon(int idGalpon)
+        Galpon IRepoGalpon.GetGalpon(int idGalpon)
         {
-            return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
+            return  _appContext.Galpon.FirstOrDefault(g => g.Id == idGalpon);
             
         }
 
-        public Galpon UpdateGalpon(Galpon galpon)
+        Galpon IRepoGalpon.UpdateGalpon(Galpon galpon)
         {
-            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == galpon.ID_Galpon);
+            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.Id == galpon.Id);
             if(galponEncontrado!=null)
             {
                 // galponEncontrado.Georeferencia=galpon.Georeferencia;

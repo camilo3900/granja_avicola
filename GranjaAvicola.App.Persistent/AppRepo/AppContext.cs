@@ -28,7 +28,7 @@ namespace GranjaAvicola.App.Persistent
                         Miguel : (localdb)\\MSSQLLocalDB
                         Angel : LAPTOP-VPO7HRDD\\SQLEXPRESS
                 */
-                .UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=(localdb)\\MSSQLLocalDB; Integrated Security=true");
+                .UseSqlServer("Initial Catalog = GranjaAvicola; Data Source=(localdb)\\MSSQLLocalDB; Integrated Security=true");
             }
         }
         
@@ -37,15 +37,16 @@ namespace GranjaAvicola.App.Persistent
         Esta sentencia es para configurar el modelo que se está creando por ahora solo dejar todas las entidades con un HasNokey() para que
         No genere errores el Entity Framework :)
         */
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Galpon>().HasNoKey();
-            modelBuilder.Entity<Georeferencias>().HasNoKey();
-            modelBuilder.Entity<Persona>().HasNoKey();
-            modelBuilder.Entity<Registro>().HasNoKey();
-            modelBuilder.Entity<Rol>().HasNoKey();
-            modelBuilder.Entity<Diagnostico>().HasNoKey();
-            //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
-        }
+
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     modelBuilder.Entity<Galpon>().HasNoKey();
+        //     modelBuilder.Entity<Georeferencias>().HasNoKey();
+        //     modelBuilder.Entity<Persona>().HasNoKey();
+        //     modelBuilder.Entity<Registro>().HasNoKey();
+        //     modelBuilder.Entity<Rol>().HasNoKey();
+        //     modelBuilder.Entity<Diagnostico>().HasNoKey();
+        //     //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
+        // }
     }
 }
