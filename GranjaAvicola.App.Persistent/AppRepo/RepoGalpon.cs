@@ -30,7 +30,7 @@ namespace GranjaAvicola.App.Domain
 
         void IRepoGalpon.DeleteGalpon(int idGalpon)
         {
-            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.Id == idGalpon);
+            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
             if (galponEncontrado == null)
                 return;
             _appContext.Galpon.Remove(galponEncontrado);
@@ -45,13 +45,13 @@ namespace GranjaAvicola.App.Domain
 
         Galpon IRepoGalpon.GetGalpon(int idGalpon)
         {
-            return  _appContext.Galpon.FirstOrDefault(g => g.Id == idGalpon);
+            return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
             
         }
 
         Galpon IRepoGalpon.UpdateGalpon(Galpon galpon)
         {
-            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.Id == galpon.Id);
+            var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == galpon.ID_Galpon);
             if(galponEncontrado!=null)
             {
                 // galponEncontrado.Georeferencia=galpon.Georeferencia;

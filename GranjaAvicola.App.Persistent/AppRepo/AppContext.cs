@@ -38,15 +38,15 @@ namespace GranjaAvicola.App.Persistent
         No genere errores el Entity Framework :)
         */
 
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     modelBuilder.Entity<Galpon>().HasNoKey();
-        //     modelBuilder.Entity<Georeferencias>().HasNoKey();
-        //     modelBuilder.Entity<Persona>().HasNoKey();
-        //     modelBuilder.Entity<Registro>().HasNoKey();
-        //     modelBuilder.Entity<Rol>().HasNoKey();
-        //     modelBuilder.Entity<Diagnostico>().HasNoKey();
-        //     //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
-        // }
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
+         {
+             modelBuilder.Entity<Galpon>().HasNoKey();
+             modelBuilder.Entity<Georeferencias>().HasNoKey();
+             modelBuilder.Entity<Persona>().HasNoKey();
+             modelBuilder.Entity<Registro>().HasNoKey();
+             modelBuilder.Entity<Rol>().HasNoKey();
+             modelBuilder.Entity<Diagnostico>().HasNoKey();
+             //TODO: Generar las configuraciones para las entidades faltantes (Registros, Rol y Diagnostico)
+         }
     }
 }

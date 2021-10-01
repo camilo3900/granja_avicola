@@ -6,7 +6,7 @@ namespace GranjaAvicola.App.Domain
      /// </summary>
     public class Galpon
     {
-        public int Id {get; set;}
+        public int ID_Galpon {get; set;}
         public int Georeferencia {get; set;}
         public int ID_OperarioCargo {get; set;}
         public int ID_VeterinarioCargo {get; set;}
