@@ -11,24 +11,24 @@ namespace GranjaAvicola.App.Domain
         /// <summary>
         /// Referencia al contexto de Paciente
         /// </summary>
-        private readonly AppContext _appContext;
+        private readonly WebAppContext _appContext;
         /// <summary>
         /// Metodo Constructor Utiiza 
         /// Inyeccion de dependencias para indicar el contexto a utilizar
         /// </summary>
         /// <param name="appContext"></param>//
-        public RepoGalpon(AppContext appContext)
+        public RepoGalpon(WebAppContext appContext)
         {
             _appContext = appContext;
         }
-        public Galpon AddGalpon(Galpon galpon)
+        Galpon IRepoGalpon.AddGalpon(Galpon galpon)
         {
             var galponAdd = _appContext.Galpon.Add(galpon);
             _appContext.SaveChanges();
             return galponAdd.Entity;
         }
 
-        public void DeleteGalpon(int idGalpon)
+        void IRepoGalpon.DeleteGalpon(int idGalpon)
         {
             var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
             if (galponEncontrado == null)
@@ -38,18 +38,18 @@ namespace GranjaAvicola.App.Domain
 
         }
 
-        public IEnumerable<Galpon> GetAllGalpon()
+        IEnumerable<Galpon> IRepoGalpon.GetAllGalpon()
         {
             return _appContext.Galpon;
         }
 
-        public Galpon GetGalpon(int idGalpon)
+        Galpon IRepoGalpon.GetGalpon(int idGalpon)
         {
             return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
             
         }
 
-        public Galpon UpdateGalpon(Galpon galpon)
+        Galpon IRepoGalpon.UpdateGalpon(Galpon galpon)
         {
             var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == galpon.ID_Galpon);
             if(galponEncontrado!=null)

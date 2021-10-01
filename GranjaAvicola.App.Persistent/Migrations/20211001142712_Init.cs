@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GranjaAvicola.App.Persistence.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace GranjaAvicola.App.Persistence.Migrations
                 name: "Diagnostico",
                 columns: table => new
                 {
-                    ID_Diagnstico = table.Column<int>(type: "int", nullable: false),
+                    Id_Diagnostico = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ID_Sugerencia = table.Column<int>(type: "int", nullable: false),
                     ID_VeterinarioCargo = table.Column<int>(type: "int", nullable: false),
                     ID_Registro = table.Column<int>(type: "int", nullable: false),
@@ -20,13 +21,15 @@ namespace GranjaAvicola.App.Persistence.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Diagnostico", x => x.Id_Diagnostico);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Galpon",
                 columns: table => new
                 {
-                    ID_Galpon = table.Column<int>(type: "int", nullable: false),
+                    ID_Galpon = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Georeferencia = table.Column<int>(type: "int", nullable: false),
                     ID_OperarioCargo = table.Column<int>(type: "int", nullable: false),
                     ID_VeterinarioCargo = table.Column<int>(type: "int", nullable: false),
@@ -37,25 +40,29 @@ namespace GranjaAvicola.App.Persistence.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Galpon", x => x.ID_Galpon);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Georeferencias",
                 columns: table => new
                 {
-                    ID_GeoRef = table.Column<int>(type: "int", nullable: false),
+                    Id_Georeferencia = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     latitud = table.Column<double>(type: "float", nullable: false),
                     altitud = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Georeferencias", x => x.Id_Georeferencia);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Persona",
                 columns: table => new
                 {
-                    ID_Persona = table.Column<int>(type: "int", nullable: false),
+                    Id_Persona = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telefono = table.Column<int>(type: "int", nullable: false),
@@ -65,13 +72,15 @@ namespace GranjaAvicola.App.Persistence.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Persona", x => x.Id_Persona);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Registro",
                 columns: table => new
                 {
-                    ID_Registro = table.Column<int>(type: "int", nullable: false),
+                    Id_Registro = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ID_Galpon = table.Column<int>(type: "int", nullable: false),
                     FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Temperatura = table.Column<double>(type: "float", nullable: false),
@@ -83,17 +92,20 @@ namespace GranjaAvicola.App.Persistence.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Registro", x => x.Id_Registro);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Rol",
                 columns: table => new
                 {
-                    ID_Rol = table.Column<int>(type: "int", nullable: false),
+                    Id_Rol = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Rol", x => x.Id_Rol);
                 });
         }
 
