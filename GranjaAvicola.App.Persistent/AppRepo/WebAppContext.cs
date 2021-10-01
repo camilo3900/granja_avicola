@@ -19,7 +19,6 @@ namespace GranjaAvicola.App.Persistent
         {
             if(!OptionsBuilder.IsConfigured)
             {
-                OptionsBuilder
                 /*
                 [Angel/Diseñador de Software] 17/09/2021
                 Aqui el DataSource es el nombre de la base de datos local recuerden cambiarlo siempre que vayan a realizar pruebas localmente
@@ -29,7 +28,15 @@ namespace GranjaAvicola.App.Persistent
                         Miguel : (localdb)\\MSSQLLocalDB
                         Angel : LAPTOP-VPO7HRDD\\SQLEXPRESS
                 */
-                .UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
+               try
+               {
+                   OptionsBuilder.UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=(localdb)\\MSSQLLocalDB; Integrated Security=true");
+               }
+               catch (System.Exception)
+               {
+                   OptionsBuilder.UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
+               }                
+                
             }
         }
         
