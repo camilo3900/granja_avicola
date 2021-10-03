@@ -13,6 +13,8 @@ namespace GranjaAvicola.App.Persistent
         public DbSet<Registro> Registro{get;set;}
         public DbSet<Diagnostico> Diagnostico{get;set;}
 
+        
+
         //TODO: Faltan las implementaciones de las entidades registros y Diagnostico 
 
         protected override void OnConfiguring(DbContextOptionsBuilder OptionsBuilder)
@@ -53,13 +55,16 @@ namespace GranjaAvicola.App.Persistent
              modelBuilder.Entity<Georeferencias>()
                 .HasKey(ge => ge.Id_Georeferencia);
              modelBuilder.Entity<Persona>()
+                //.HasAlternateKey(p => p.ID_Rol)
                 .HasKey(p => p.Id_Persona);
+ 
              modelBuilder.Entity<Registro>()
                 .HasKey(re => re.Id_Registro);
              modelBuilder.Entity<Rol>()
                 .HasKey(rol => rol.Id_Rol);
              modelBuilder.Entity<Diagnostico>()
                 .HasKey(d => d.Id_Diagnostico);
+
          }
     }
 }

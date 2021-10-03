@@ -24,6 +24,7 @@ namespace GranjaAvicola.App.Frontend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            //services.AddSingleton<>
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
