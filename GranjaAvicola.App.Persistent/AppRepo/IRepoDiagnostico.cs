@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using GranjaAvicola.App.Domain;
 
-namespace GranjaAvicola.App.Domain
+namespace GranjaAvicola.App.Persistent
 {
     public interface IRepoDiagnostico
     {

@@ -17,7 +17,7 @@ namespace GranjaAvicola.App.Console
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
-            //AddGalpon();
+            AddGalpon();
             //AddPersona();
             //AddDiagnostico();
             //AddRegistro();
