@@ -18,18 +18,47 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Galpon/RegistroGalpon">Galpon</a>
+                            <div class="dropdown show">
+                                <a class="btn dropdown-toggle dropdown-navItem" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Galpon
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="Galpon">
+                                    <a class="dropdown-item" asp-area="" asp-page="/Galpon/RegistroGalpon">Registro</a>
+                                    <a class="dropdown-item" href="#">Listado</a>
+                                </div>
+                            </div>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Veterinario/RegistroVeterinario">Veterinario</a>
+                            <div class="dropdown show">
+                                <a class="btn dropdown-toggle dropdown-navItem" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Veterinario
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="Veterinario">
+                                    <a class="dropdown-item" asp-area="" asp-page="/Veterinario/RegistroVeterinario">Registro</a>
+                                    <a class="dropdown-item" href="#">Listado</a>
+                                </div>
+                            </div>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Operario/RegistroOperario">Operario</a>
+                            <div class="dropdown show">
+                                <a class="btn dropdown-toggle dropdown-navItem" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Operario
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="Operario">
+                                    <a class="dropdown-item" asp-area="" asp-page="/Operario/RegistroOperario">Registro</a>
+                                    <a class="dropdown-item" href="#">Listado</a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
+
                 </div>
             </div>
+
         </nav>
     </header>
     <div class="container">
