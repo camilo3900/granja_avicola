@@ -1,5 +1,5 @@
 ﻿@page
-@model GranjaAvicola.App.FrontEnd.Pages.RegistroGalponModel
+@model GranjaAvicola.App.FrontEnd.Pages.SearchGalponModel
 @{
 }
 <div class="Transbox text-center" style="padding: 10px;">
@@ -58,11 +58,11 @@
                 <div>
                     <label for="SearchOperary" style="padding-right: 1rem;">Buscar Galpón</label>
                     <input name="SearchOperary" list="SearchGalponID" class="FormInput" id="ComboBox" placeholder="-Buscar ID Galpon-">
-                    <datalist id="SearchGalponID">
-                        <option value="0001"></option>
-                        <option value="0002"></option>
-                        <option value="0003"></option>
-                        <option value="0004"></option>
+                    <datalist id="SearchGalponID" asp-route-id="@galpon.ID_Galpon">
+                        @foreach (var Galpon in Galpones)
+                        {
+                            <option value=@Galpon.ID_Galpon> @Galpon.Nombre</option>
+                        }
                     </datalist>    
                     <button type="button" class="btn btn-outline-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -70,23 +70,24 @@
                         </svg>
                     </button>
                 </div>
+
                 <div style="margin-bottom: 2rem;">
                     <Table class="infoTable">
                         <tr>
                             <th>Nombre:</th>
-                            <td id="OperarioNombre">null</td>
+                            <td id="OperarioNombre">@Galpones.Nombre</td>
                         </tr>
                         <tr>
                             <th>Numero de animales:</th>
-                            <td id="OperarioTelefono">null</td>
+                            <td id="OperarioTelefono">@Galpones.NumeroAnimales</td>
                         </tr>
                         <tr>
                             <th>Fecha de ingreso:</th>
-                            <td id="OperarioGenero">null</td>
+                            <td id="OperarioGenero">@Galpones.FechaIngreso</td>
                         </tr>
                         <tr>
                             <th>Fecha de salida:</th>
-                            <td id="OperarioTelefono">null</td>
+                            <td id="OperarioTelefono">@Galpones.FechaSalida</td>
                         </tr>
                         <tr>
                             <th>Altitud:</th>
@@ -114,13 +115,14 @@
                         </tr>
                     </Table>
                 </div>
+                
                 <div style="display: flex; justify-content: space-around;">
-                    <a  class="btn btn-secondary" asp-page="./EditGalpon"><button type="button" class="btn btn-outline-secondary">
+                    <button type="button" class="btn btn-outline-secondary">
                         Editar
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                         </svg> 
-                    </button></a>
+                    </button>
                     <button type="button"  class="btn btn-outline-danger">
                         Eliminar 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
