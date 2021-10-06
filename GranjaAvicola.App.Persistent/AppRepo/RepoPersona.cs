@@ -4,19 +4,22 @@ using System.Linq;
 using GranjaAvicola.App.Domain;
 using GranjaAvicola.App.Persistent;
 
-namespace GranjaAvicola.App.Domain
+namespace GranjaAvicola.App.Persistent
 {
     public class RepoPersona : IRepoPersona
     {
         /// <summary>
         /// Referencia al contexto de Paciente
         /// </summary>
-        private readonly WebAppContext _appContext;
+        private readonly WebAppContext _appContext = new WebAppContext();
         /// <summary>
         /// Metodo Constructor Utiiza 
         /// Inyeccion de dependencias para indicar el contexto a utilizar
         /// </summary>
         /// <param name="appContext"></param>//
+        public RepoPersona(){
+
+        }
         public RepoPersona(WebAppContext appContext)
         {
             _appContext = appContext;

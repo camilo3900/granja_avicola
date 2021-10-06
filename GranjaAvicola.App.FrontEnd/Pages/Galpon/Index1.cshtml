@@ -1,0 +1,29 @@
+﻿@page
+@model GranjaAvicola.App.FrontEnd.Pages.Index1Model
+@{
+}
+<h1>Listado de Galpons</h1>
+<a class="btn btn-primary" asp-page="./Create1">Crear Galpon</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Galpon in Model.galpones)
+        { 
+            <tr>
+                <td>Aqui</td>
+                <td>@Galpon.Nombre</td>
+                <td>@Galpon.NumeroAnimales</td>
+                <td>@Galpon.ID_Galpon</td>
+                <td><a class="btn btn-secondary" asp-page="./Details1" asp-route-id="@Galpon.ID_Galpon">Detalle</a></td>
+                <td><a class="btn btn-secondary" asp-page="./Edit1" asp-route-id="@Galpon.ID_Galpon">Editar</a></td> 
+            </tr>
+        }
+    </tbody>
+</table>

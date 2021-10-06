@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using GranjaAvicola.App.Persistent;
 
 namespace GranjaAvicola.App.Frontend
 {
@@ -24,7 +25,10 @@ namespace GranjaAvicola.App.Frontend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            //services.AddSingleton<>
+            services.AddSingleton<IRepoGalpon, RepoGalpon>();
+            //services.AddDbContext<WebAppContext>(); 
+           //services.AddScoped<IRepoGalpon, RepoGalpon>();
+             
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
