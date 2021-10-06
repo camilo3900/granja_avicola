@@ -30,14 +30,14 @@ namespace GranjaAvicola.App.Persistent
                         Miguel : (localdb)\\MSSQLLocalDB
                         Angel : LAPTOP-VPO7HRDD\\SQLEXPRESS
                 */
-               try
-               {
+            //    try
+            //    {
                    OptionsBuilder.UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=(localdb)\\MSSQLLocalDB; Integrated Security=true");
-               }
-               catch (System.Exception)
-               {
-                   OptionsBuilder.UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
-               }                
+            //    }
+            //    catch (System.Exception)
+            //    {
+            //        OptionsBuilder.UseSqlServer("Initial Catalog = GranjaAvicola.Data; Data Source=LAPTOP-VPO7HRDD\\SQLEXPRESS; Integrated Security=true");
+            //    }                
                 
             }
         }
