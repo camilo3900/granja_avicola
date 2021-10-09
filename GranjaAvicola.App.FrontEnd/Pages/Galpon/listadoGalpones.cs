@@ -9,12 +9,12 @@ using GranjaAvicola.App.Persistent;
 
 namespace GranjaAvicola.App.FrontEnd.Pages
 {
-    public class Index1Model : PageModel
+    public class listadoGalponesModel : PageModel
     {
         private readonly IRepoGalpon _repoGalpon;
         public IEnumerable<Galpon> galpones {get; set;}
 
-        public Index1Model(IRepoGalpon repoGalpon)
+        public listadoGalponesModel(IRepoGalpon repoGalpon)
         {
             _repoGalpon=repoGalpon;
         }

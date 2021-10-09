@@ -48,7 +48,15 @@ namespace GranjaAvicola.App.Persistent
 
         Galpon IRepoGalpon.GetGalpon(int idGalpon)
         {
-            return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
+            try
+            {
+                return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon); 
+            }
+            catch (System.Exception)
+            {
+                return null;
+                throw;
+            }
             
         }
 

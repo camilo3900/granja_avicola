@@ -1,0 +1,65 @@
+﻿@page
+@model GranjaAvicola.App.FrontEnd.Pages.testModel
+@{
+}
+<div class="Transbox">
+    <h1>Añadir Galpon</h1>
+    <div class="row">
+        <form asp-page-handler="register" method="post">
+            <label> Nombre Galpon </label>
+            <input type="text" name="NombreGalpon">
+            <label for="NumeroAnimales"> Numero de animales</label>
+            <input type="text" name="NumeroAnimales" placeholder="Nombre">
+            <label for="FechaIngreso"> Fecha de ingreso </label>
+            <input type="Date" name="FechaIngreso" placeholder="dd/mm/aaaa">
+            <label for="FechaIngreso"> Fecha de salida </label>
+            <input type="Date" name="FechaSalida" placeholder="dd/mm/aaaa">
+            <input type="submit">
+        </form>
+        <h3 class="clearfix">@Model.Message</h3> 
+        @if (Model.uploadQueue)
+        {
+            <div>
+                <h4>Datos en Queue:</h4>
+                <p>Nombre Galpon: <strong>@Model.Temporal.Nombre</strong></p>
+                <p>Numero de animales: <strong>@Model.Temporal.NumeroAnimales</strong></p>
+                <p>Fecha Ingreso: <strong>@Model.Temporal.FechaIngreso</strong></p>
+                <p>Fecha Salida: <strong>@Model.Temporal.FechaSalida</strong></p>
+            </div>
+        }
+    </div>
+</div> 
+<div class="Transbox">
+    <h1> Buscar ID galpon </h1>
+    <div class="row ">
+        <div class="col-lg-1">
+            <form asp-page-handler="view" method="post">
+                <input type="text" name="lolaso">
+                <button class="btn btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </form>
+        </div>    
+    </div>
+    @if (Model.searchQueried)
+    {
+        <h3 class="clearfix">@Model.Message</h3> 
+        @if (Model.galpon == null)
+        {
+            <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS" style="width:700px;height:500px;">
+        }
+        else
+        {
+            <p>ID Galpon: <strong>@Model.galpon.ID_Galpon</strong></p>
+            <p>Nombre Galpon: <strong>@Model.galpon.Nombre</strong></p>
+            <p>Numero de animales: <strong>@Model.galpon.NumeroAnimales</strong></p>
+            <p>Fecha Ingreso: <strong>@Model.galpon.FechaIngreso</strong></p>
+            <p>Fecha Salida: <strong>@Model.galpon.FechaSalida</strong></p>         
+        }
+    }    
+
+
+</div>
+    <a href="/test"> <button class="btn btn-primary"> Volver</button> </a>

@@ -17,18 +17,23 @@ namespace GranjaAvicola.App.Console
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
-            AddGalpon();
+            //AddGalpon();
             //AddPersona();
             //AddDiagnostico();
             //AddRegistro();
+            //getGalpon(1);
+            //getGalpon(100);
+            for (int i = 1; i < 50; i++)
+            {
+                deleteGalpon(i);
+            }
         }
 
         private static void AddGalpon()
         {
             var galpon = new Galpon
             {
-                
-                Nombre = "Mañanitas",
+                Nombre = "Lolaso",
                 NumeroAnimales = 203,
                 FechaIngreso = new DateTime (2020,02,25),
                 FechaSalida = new DateTime(2021, 11, 02)
@@ -70,6 +75,20 @@ namespace GranjaAvicola.App.Console
                 GallinasEnfermas = 3
             };
             _repoRegistro.AddRegistro(registro);
+        }
+        private static void getGalpon(int idGalpon)
+        {
+            var galpon = _repoGalpon.GetGalpon(idGalpon);
+            if (galpon != null)
+            {
+                System.Console.WriteLine("Galpon encontrado\n"+galpon.Nombre + " " + galpon.ID_Galpon);
+            }
+        }
+
+        private static void deleteGalpon(int idGalpon)
+        {
+            _repoGalpon.DeleteGalpon(idGalpon);
+            System.Console.WriteLine("Galpon eliminado" + idGalpon);
         }
     }
 }
