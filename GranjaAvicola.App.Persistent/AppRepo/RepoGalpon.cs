@@ -31,14 +31,19 @@ namespace GranjaAvicola.App.Persistent
             return galponAdd.Entity;
         }
 
-        void IRepoGalpon.DeleteGalpon(int idGalpon)
+        Galpon IRepoGalpon.DeleteGalpon(int idGalpon)
         {
             var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
             if (galponEncontrado == null)
-                return;
-            _appContext.Galpon.Remove(galponEncontrado);
-            _appContext.SaveChanges();
-
+            {
+                return null;
+            }
+            else 
+            {
+                _appContext.Galpon.Remove(galponEncontrado);
+                _appContext.SaveChanges();
+                return galponEncontrado;
+            }
         }
 
         IEnumerable<Galpon> IRepoGalpon.GetAllGalpon()

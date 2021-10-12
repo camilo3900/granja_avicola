@@ -8,7 +8,7 @@ namespace GranjaAvicola.App.Persistent
         IEnumerable<Galpon> GetAllGalpon();
         Galpon AddGalpon(Galpon galpon);
         Galpon UpdateGalpon(Galpon galpon);
-        void DeleteGalpon(int idGalpon);
+        Galpon DeleteGalpon(int idGalpon);
         Galpon GetGalpon(int idGalpon);
     }
 }
