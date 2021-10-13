@@ -31,13 +31,16 @@ namespace GranjaAvicola.App.Persistent
             return PersonaAdd.Entity;
         }
 
-        void IRepoPersona.DeletePersona(int idPersona)
+        Persona IRepoPersona.DeletePersona(int idPersona)
         {
             var PersonaEncontrado = _appContext.Persona.FirstOrDefault(g => g.Id_Persona == idPersona);
             if (PersonaEncontrado == null)
-                return;
+                return null;
+            else {
             _appContext.Persona.Remove(PersonaEncontrado);
             _appContext.SaveChanges();
+            return PersonaEncontrado;
+            }
 
         }
 
@@ -63,6 +66,7 @@ namespace GranjaAvicola.App.Persistent
                 PersonaEncontrado.Telefono=Persona.Telefono;
                 PersonaEncontrado.Correo=Persona.Correo;
                 PersonaEncontrado.Genero=Persona.Genero;
+                PersonaEncontrado.ID_Rol=Persona.ID_Rol;
 
                 
 
