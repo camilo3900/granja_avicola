@@ -26,6 +26,7 @@ namespace GranjaAvicola.App.Frontend
         {
             services.AddRazorPages();
             services.AddSingleton<IRepoGalpon, RepoGalpon>();
+            services.AddSingleton<IRepoGeoreferencias, RepoGeoreferencias>();
             //services.AddDbContext<WebAppContext>(); 
            //services.AddScoped<IRepoGalpon, RepoGalpon>();
              

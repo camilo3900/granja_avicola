@@ -1,0 +1,148 @@
+﻿@page
+@model GranjaAvicola.App.FrontEnd.Pages.testModel
+@{
+}
+
+@*-
+    CRUD [Create] 
+
+    Aqui esta todo el html para hacer una entrada nueva a la DB usa un form que tiene como
+    web handler el metodo read que esta definido en el modelo.
+*@
+
+<div class="Transbox">
+    <h1>Añadir Galpon</h1>
+    <div class="row">
+        <form asp-page-handler="create" method="post">
+            <label> Nombre Galpon </label>
+            <input type="text" name="NombreGalpon">
+            <label for="NumeroAnimales"> Numero de animales</label>
+            <input type="text" name="NumeroAnimales" placeholder="Nombre">
+            <label for="FechaIngreso"> Fecha de ingreso </label>
+            <input type="Date" name="FechaIngreso" placeholder="dd/mm/aaaa">
+            <label for="FechaIngreso"> Fecha de salida </label>
+            <input type="Date" name="FechaSalida" placeholder="dd/mm/aaaa">
+            <label for="FechaIngreso"> Altitud </label>
+            <input type="text" name="Altitud" placeholder="Altitud">
+            <label for="FechaIngreso"> Latitud </label>
+            <input type="text" name="Latitud" placeholder="Latitud">
+            <input type="submit">
+        </form>
+        @if (Model.upload)
+        {
+            <div style="padding-left: 50px;">
+                <h3 class="clearfix">@Model.Message</h3> 
+                <p>ID Galpon: <strong>@Model.TemporalGalpon.ID_Galpon</strong></p>
+                <p>Nombre Galpon: <strong>@Model.TemporalGalpon.Nombre</strong></p>
+                <p>Numero de animales: <strong>@Model.TemporalGalpon.NumeroAnimales</strong></p>
+                <p>Fecha Ingreso: <strong>@Model.TemporalGalpon.FechaIngreso</strong></p>
+                <p>Fecha Salida: <strong>@Model.TemporalGalpon.FechaSalida</strong></p>
+                <p>Georeferencia: <strong>@Model.TemporalGalpon.Georeferencia</strong></p>
+                <p>Altitud: <strong>@Model.Temporalgeoref.altitud</strong></p>
+                <p>Latitud: <strong>@Model.Temporalgeoref.latitud</strong></p>
+            </div>
+        }
+    </div>
+</div> 
+
+@*-
+    CRUD [READ] 
+
+    Aqui esta todo el html para hacer una consulta usa un form que tiene como
+    web handler el metodo read que esta definido en el modelo.
+*@
+<div class="Transbox">
+    <h1> Buscar ID galpon </h1>
+    <div>
+        <form asp-page-handler="read" method="post">
+            <input type="text" name="lolaso">
+            <button class="btn btn-outline-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </form>
+    </div>    
+    @if (Model.searchQueried)
+    {
+        <h3 class="clearfix">@Model.Message</h3> 
+        @if (Model.galpon == null)
+        {
+            <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS" style="width:700px;height:500px;">
+        }
+        else
+        {
+            <p>ID Galpon: <strong>@Model.galpon.ID_Galpon</strong></p>
+            <p>Nombre Galpon: <strong>@Model.galpon.Nombre</strong></p>
+            <p>Numero de animales: <strong>@Model.galpon.NumeroAnimales</strong></p>
+            <p>Fecha Ingreso: <strong>@Model.galpon.FechaIngreso</strong></p>
+            <p>Fecha Salida: <strong>@Model.galpon.FechaSalida</strong></p>         
+        }
+    }    
+</div>
+
+@*-
+    CRUD [Update] 
+
+    Aqui esta todo el html para hacer update usa un form que tiene como
+    web handler el metodo Update_Get y Update_Set que esta definido en el modelo.
+*@
+<div class="Transbox">
+    <h1>Actualizar Galpones</h1>
+    <div>
+        <h3 class="clearfix">@Model.Message</h3> 
+        <form asp-page-handler="update_get" method="post">
+            <input type="text" name="search">
+            <button class="btn btn-outline-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+    <div>
+        @if (@Model.updateQueried)
+        {
+            <form asp-page-handler="update_set" method="post">
+                <label> ID Galpon </label>
+                <input type="number" name="Update_GalponID" readonly asp-for="galpon.ID_Galpon">
+                <label> Nombre Galpon </label>
+                <input type="text" name="Update_NombreGalpon" asp-for="galpon.Nombre">
+                <label> Numero de animales</label>
+                <input type="text" name="Update_NumeroAnimales" asp-for="galpon.NumeroAnimales">
+                <label> Fecha de ingreso </label>
+                <input type="Date" name="Update_FechaIngreso" asp-for="galpon.FechaIngreso">
+                <label> Fecha de salida </label>
+                <input type="Date" name="Update_FechaSalida" asp-for="galpon.FechaSalida">
+                
+                <button class="btn btn-outline-secondary">Actualizar</button>
+            </form>
+        }
+    </div>
+    
+</div>
+
+@*-
+    CRUD [Delete] 
+
+    Aqui esta todo el html para hacer delete usa un form que tiene como
+    web handler el metodo Delete que esta definido en el modelo.
+*@
+
+<div class="Transbox">
+    <h1>Eliminar Galpones</h1>
+    <div>
+        <h3 class="clearfix">@Model.Message</h3> 
+        <form asp-page-handler="delete" method="post">
+            <input type="text" name="Delete_Search">
+            <button class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
+
+<a href="/test"> <button class="btn btn-primary"> Volver</button> </a>

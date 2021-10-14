@@ -1,0 +1,29 @@
+﻿@page
+@model GranjaAvicola.App.FrontEnd.Pages.listadoGalponesModel
+@{
+}
+<div class="Transbox text-center">
+    <h1>Listado de Galpones</h1>
+</div>
+
+<div class="Transbox">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Numero Animales</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Galpon in Model.galpones)
+            { 
+                <tr>
+                    <td style="text-align: left;">@Galpon.ID_Galpon</td>
+                    <td style="text-align: left;">@Galpon.Nombre</td>
+                    <td style="text-align: left;">@Galpon.NumeroAnimales</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

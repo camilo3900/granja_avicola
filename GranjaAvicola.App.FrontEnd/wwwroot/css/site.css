@@ -6,6 +6,8 @@ body {
   background: rgba(215, 245, 244, 1) url(Resources/BackgroundPattern.png);
 }
 
+
+
 body::-webkit-scrollbar {
   width: 0.5rem;
 }

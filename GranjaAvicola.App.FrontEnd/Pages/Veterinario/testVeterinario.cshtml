@@ -1,0 +1,173 @@
+﻿@page
+@model GranjaAvicola.App.FrontEnd.Pages.testVeterinarioModel
+@{
+}
+
+@*-
+    CRUD [Create]
+
+    Aqui esta todo el html para hacer una entrada nueva a la DB usa un form que tiene como
+    web handler el metodo read que esta definido en el modelo.
+*@
+
+<div class="Transbox">
+    <h1>Añadir Veterinario</h1>
+    <div class="row">
+        <form asp-page-handler="create" method="post">
+            <label> Nombre Veterinario </label>
+            <input type="text" name="NombreVeterinario" placeholder="Nombre">
+            <label for="Telefono"> Telefono</label>
+            <input type="text" name="Telefono" placeholder="(000)000-000">
+            <label for="Correo"> Correo </label>
+            <input type="email" name="Correo" placeholder="nombre@ejemplo.com">
+
+            <label for="Genero"> Genero </label>
+            <select @*asp-for="persona.Genero"*@ class="FormInput" id="Genero">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Bisexual">Bisexual</option>
+                <option value="Intersexual">Intersexual</option>
+                <option value="Pansexual">Pansexual</option>
+                <option value="Transexual">Transexual</option>
+            </select>
+            <input type="Text" name="Genero">
+
+
+            <input type="submit">
+        </form>
+        @if (Model.upload)
+        {
+            <div style="padding-left: 50px;">
+                <h3 class="clearfix">@Model.Message</h3>
+                <p>ID Veterinario: <strong>@Model.Temporal.Id_Persona</strong></p>
+                <p>Nombre Veterinario: <strong>@Model.Temporal.Nombre</strong></p>
+                <p>Telefono: <strong>@Model.Temporal.Telefono</strong></p>
+                <p>Correo: <strong>@Model.Temporal.Correo</strong></p>
+                <p>Genero: <strong>@Model.Temporal.Genero</strong></p>
+            </div>
+        }
+    </div>
+</div>
+
+@*-
+    CRUD [READ]
+
+    Aqui esta todo el html para hacer una consulta usa un form que tiene como
+    web handler el metodo read que esta definido en el modelo.
+*@
+<div class="Transbox">
+    <h1> Buscar ID Veterinario </h1>
+    <div>
+        <form asp-page-handler="read" method="post">
+            <input type="text" name="lolaso">
+            <button class="btn btn-outline-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+    @if (Model.searchQueried)
+    {
+        <h3 class="clearfix">@Model.Message</h3>
+        @if (Model.persona == null || Model.persona.ID_Rol.Equals(1))
+        {
+            <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS"
+        style="width:700px;height:500px;">
+        }
+        else
+        {
+            if(Model.persona.ID_Rol.Equals(2)){
+            <p>ID Veterinario: <strong>@Model.persona.Id_Persona</strong></p>
+            <p>Nombre Veterinario: <strong>@Model.persona.Nombre</strong></p>
+            <p>Telefono: <strong>@Model.persona.Telefono</strong></p>
+            <p>Correo: <strong>@Model.persona.Correo</strong></p>
+            <p>Genero: <strong>@Model.persona.Genero</strong></p>
+            }
+        }
+    }
+</div>
+
+@*-
+    CRUD [Update]
+
+    Aqui esta todo el html para hacer update usa un form que tiene como
+    web handler el metodo Update_Get y Update_Set que esta definido en el modelo.
+*@
+<div class="Transbox">
+    <h1>Actualizar Veterinarios</h1>
+    <div>
+        <h3 class="clearfix">@Model.Message</h3>
+        <form asp-page-handler="update_get" method="post">
+            <input type="text" name="search">
+            <button class="btn btn-outline-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+    <div>
+        @if (@Model.updateQueried)
+        {
+            <form asp-page-handler="update_set" method="post">
+                <label> ID Veterinario </label>
+                <input type="number" name="Update_VeterinarioID" readonly asp-for="persona.Id_Persona">
+                <label> Nombre Veterinario </label>
+                <input type="text" name="Update_NombreVeterinario" asp-for="persona.Nombre">
+                <label> Telefono</label>
+                <input type="number" name="Update_Telefono" asp-for="persona.Telefono">
+                <label> Correo </label>
+                <input type="email" name="Update_Correo" asp-for="persona.Correo">
+                @* <label> Genero </label>
+                <input type="text" name="Update_Genero" asp-for="persona.FechaSalida"> *@
+
+                <label > Genero </label>
+            <select @*asp-for="persona.Genero"*@ class="FormInput" id="Genero">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Bisexual">Bisexual</option>
+                <option value="Intersexual">Intersexual</option>
+                <option value="Pansexual">Pansexual</option>
+                <option value="Transexual">Transexual</option>
+            </select>
+            <input type="Text" name="Update_Genero" asp-for="persona.Genero">
+
+                <button class="btn btn-outline-secondary">Actualizar</button>
+            </form>
+        }
+    </div>
+
+</div>
+
+@*-
+    CRUD [Delete]
+
+    Aqui esta todo el html para hacer delete usa un form que tiene como
+    web handler el metodo Delete que esta definido en el modelo.
+*@
+
+<div class="Transbox">
+    <h1>Eliminar Veterinarios</h1>
+    <div>
+        <h3 class="clearfix">@Model.Message</h3>
+        <form asp-page-handler="delete" method="post">
+            <input type="text" name="Delete_Search">
+            <button class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+</div>
+
+<a href="/testVeterinario"> <button class="btn btn-primary"> Volver</button> </a>

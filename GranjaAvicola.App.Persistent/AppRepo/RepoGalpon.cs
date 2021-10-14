@@ -8,15 +8,8 @@ namespace GranjaAvicola.App.Persistent
 {
     public class RepoGalpon : IRepoGalpon
     {
-        /// <summary>
-        /// Referencia al contexto de Paciente
-        /// </summary>
         private readonly WebAppContext _appContext = new WebAppContext();
-        /// <summary>
-        /// Metodo Constructor Utiiza 
-        /// Inyeccion de dependencias para indicar el contexto a utilizar
-        /// </summary>
-        /// <param name="appContext"></param>//
+
         public RepoGalpon(){
 
         }
@@ -30,15 +23,19 @@ namespace GranjaAvicola.App.Persistent
             _appContext.SaveChanges();
             return galponAdd.Entity;
         }
-
-        void IRepoGalpon.DeleteGalpon(int idGalpon)
+        Galpon IRepoGalpon.DeleteGalpon(int idGalpon)
         {
             var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
             if (galponEncontrado == null)
-                return;
-            _appContext.Galpon.Remove(galponEncontrado);
-            _appContext.SaveChanges();
-
+            {
+                return null;
+            }
+            else 
+            {
+                _appContext.Galpon.Remove(galponEncontrado);
+                _appContext.SaveChanges();
+                return galponEncontrado;
+            }
         }
 
         IEnumerable<Galpon> IRepoGalpon.GetAllGalpon()
@@ -48,7 +45,15 @@ namespace GranjaAvicola.App.Persistent
 
         Galpon IRepoGalpon.GetGalpon(int idGalpon)
         {
-            return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon);
+            try
+            {
+                return  _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == idGalpon); 
+            }
+            catch (System.Exception)
+            {
+                return null;
+                throw;
+            }
             
         }
 

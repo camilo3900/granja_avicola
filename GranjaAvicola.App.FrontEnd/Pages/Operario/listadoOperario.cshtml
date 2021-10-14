@@ -1,0 +1,33 @@
+﻿@page
+@model GranjaAvicola.App.FrontEnd.Pages.listadoOperarioModel
+@{
+}
+<h1>Listado de Operarios</h1>
+<a class="btn btn-primary" asp-page="./Create1">Crear Operario</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Persona in Model.persona) 
+        { 
+            
+            if(Persona.ID_Rol.Equals(1)){
+            <tr>
+                <td>@Persona.Nombre</td>
+                <td>@Persona.Apellido</td>
+                <td>@Persona.Telefono</td>
+                <td>@Persona.Correo</td>
+                <td>@Persona.Id_Persona</td>
+                <td><a class="btn btn-secondary" asp-page="./Details1" asp-route-Id="@Persona.Id_Persona">Detalle</a></td>
+                <td><a class="btn btn-secondary" asp-page="./EditPersona" asp-route-Id="@Persona.Id_Persona">Editar</a></td> 
+            </tr>
+            }
+        }
+    </tbody>
+</table>
