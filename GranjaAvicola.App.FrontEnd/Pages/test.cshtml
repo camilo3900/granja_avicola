@@ -22,17 +22,24 @@
             <input type="Date" name="FechaIngreso" placeholder="dd/mm/aaaa">
             <label for="FechaIngreso"> Fecha de salida </label>
             <input type="Date" name="FechaSalida" placeholder="dd/mm/aaaa">
+            <label for="FechaIngreso"> Altitud </label>
+            <input type="text" name="Altitud" placeholder="Altitud">
+            <label for="FechaIngreso"> Latitud </label>
+            <input type="text" name="Latitud" placeholder="Latitud">
             <input type="submit">
         </form>
         @if (Model.upload)
         {
             <div style="padding-left: 50px;">
                 <h3 class="clearfix">@Model.Message</h3> 
-                <p>ID Galpon: <strong>@Model.Temporal.ID_Galpon</strong></p>
-                <p>Nombre Galpon: <strong>@Model.Temporal.Nombre</strong></p>
-                <p>Numero de animales: <strong>@Model.Temporal.NumeroAnimales</strong></p>
-                <p>Fecha Ingreso: <strong>@Model.Temporal.FechaIngreso</strong></p>
-                <p>Fecha Salida: <strong>@Model.Temporal.FechaSalida</strong></p>
+                <p>ID Galpon: <strong>@Model.TemporalGalpon.ID_Galpon</strong></p>
+                <p>Nombre Galpon: <strong>@Model.TemporalGalpon.Nombre</strong></p>
+                <p>Numero de animales: <strong>@Model.TemporalGalpon.NumeroAnimales</strong></p>
+                <p>Fecha Ingreso: <strong>@Model.TemporalGalpon.FechaIngreso</strong></p>
+                <p>Fecha Salida: <strong>@Model.TemporalGalpon.FechaSalida</strong></p>
+                <p>Georeferencia: <strong>@Model.TemporalGalpon.Georeferencia</strong></p>
+                <p>Altitud: <strong>@Model.Temporalgeoref.altitud</strong></p>
+                <p>Latitud: <strong>@Model.Temporalgeoref.latitud</strong></p>
             </div>
         }
     </div>

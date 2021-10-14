@@ -23,10 +23,12 @@ namespace GranjaAvicola.App.Console
             //AddRegistro();
             //getGalpon(1);
             //getGalpon(100);
-            for (int i = 1; i < 50; i++)
+/*             for (int i = 1; i < 50; i++)
             {
                 deleteGalpon(i);
-            }
+            } */
+                deleteGalpon(1021);
+                deleteGalpon(1022);
         }
 
         private static void AddGalpon()

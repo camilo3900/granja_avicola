@@ -7,42 +7,41 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using GranjaAvicola.App.Domain;
 using GranjaAvicola.App.Persistent;
 
-namespace  GranjaAvicola.App.FrontEnd.Pages
+namespace GranjaAvicola.App.FrontEnd.Pages
 {
-    public class testModel : PageModel
-    {        
+    public class RegistroControlGalponesModel : PageModel
+    {
         private readonly IRepoGalpon _repoGalpon;
-        private readonly IRepoGeoreferencias _repoGeoreferencias;
-        public IEnumerable<Galpon> galpones {get; set;}
+        private readonly IRepoGeoreferencias _repoGeoreferencia;
         public Galpon galpon {get; set;}
         public Galpon TemporalGalpon {get; set;}
         public Georeferencias georeferencia {get; set;}
         public Georeferencias Temporalgeoref {get; set;}
-        public string Message { get; set; } = "";
-        public string searchID {get;set;}
+        public string[] Message = new string[] {"", "", "", ""};
+        public string searchID {get; set;}
+        public bool CreateEntry {get;set;} = false;
         public bool searchQueried {get; set;} = false;
-        public bool updateQueried {get; set;} = false;
-        public bool upload {get; set;} = false;
+        public bool UpdateState {get; set;} = false;
 
-        public testModel(IRepoGalpon repoGalpon, IRepoGeoreferencias repoGeoreferencias)
+        public RegistroControlGalponesModel(IRepoGalpon repoGalpon, IRepoGeoreferencias repoGeoreferencias)
         {
             _repoGalpon=repoGalpon;
-            _repoGeoreferencias=repoGeoreferencias;
+            _repoGeoreferencia=repoGeoreferencias;
         }
         public void OnGet()
         {
-            georeferencia = new Georeferencias();
+            
             galpon = new Galpon();
+            georeferencia = new Georeferencias();
         }
         public void OnPost()
         {
-
+            
         }
         public void OnPostCreate()
         {
             TemporalGalpon = new Galpon();
             Temporalgeoref = new Georeferencias();
-            upload = true;
             
             TemporalGalpon.Nombre = Request.Form["NombreGalpon"];
             TemporalGalpon.NumeroAnimales = int.Parse(Request.Form["NumeroAnimales"]);
@@ -51,65 +50,62 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             
             Temporalgeoref.altitud = double.Parse(Request.Form["Altitud"]); 
             Temporalgeoref.latitud = double.Parse(Request.Form["Latitud"]); 
-            Temporalgeoref = _repoGeoreferencias.AddGeoreferencia(Temporalgeoref);
+            Temporalgeoref = _repoGeoreferencia.AddGeoreferencia(Temporalgeoref);
 
             TemporalGalpon.Georeferencia = Temporalgeoref.Id_Georeferencia;
 
             TemporalGalpon = _repoGalpon.AddGalpon(TemporalGalpon);
-            Message = "Galpon subido con exito";
+            Message[0] = "Galpon subido con exito";
+            Message[1] = $"ID referencia: {TemporalGalpon.ID_Galpon}";
+            CreateEntry = true;
         }
         public void OnPostRead()
         {
-            searchID = Request.Form["lolaso"];
-            searchQueried = true;
+            searchID = Request.Form["SearchID"];
             //galpon = new Galpon();
             galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
-            if (galpon != null)
+            searchQueried = true;
+            if (galpon == null)
             {
-                Message = "Galpon encontrado!";
+                Message[2] = "No encontrado";
             }
             else
             {
-                Message = "GOD FUCKING DAMMIT KRIS WHERE THE FUCK ARE WE!?";
+                georeferencia = _repoGeoreferencia.GetGeoreferencia(galpon.Georeferencia);
             }
+
         }
+        public void OnPostUpdate_get()
+        {
+            searchID = Request.Form["TempID"];
+            galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
+            georeferencia = _repoGeoreferencia.GetGeoreferencia(galpon.Georeferencia);
+            UpdateState = true;
+        }
+        
         public void OnPostUpdate_set()
         {
             TemporalGalpon = new Galpon();
+            Temporalgeoref = new Georeferencias();
+
             TemporalGalpon.ID_Galpon = int.Parse(Request.Form["Update_GalponID"]);
             TemporalGalpon.Nombre = Request.Form["Update_NombreGalpon"];
             TemporalGalpon.NumeroAnimales = int.Parse(Request.Form["Update_NumeroAnimales"]);
             TemporalGalpon.FechaIngreso = DateTime.Parse(Request.Form["Update_FechaIngreso"]);
             TemporalGalpon.FechaSalida = DateTime.Parse(Request.Form["Update_FechaSalida"]);
+            TemporalGalpon.Georeferencia = int.Parse(Request.Form["Update_IDgeoreferencias"]);
+
+            Temporalgeoref.Id_Georeferencia = TemporalGalpon.Georeferencia;
+            Temporalgeoref.altitud = double.Parse(Request.Form["Update_Altitud"]); 
+            Temporalgeoref.latitud = double.Parse(Request.Form["Update_Latitud"]); 
+            
+            _repoGeoreferencia.UpdateGeoreferencia(Temporalgeoref);
             _repoGalpon.UpdateGalpon(TemporalGalpon);
-            Message = $"Galpon #{TemporalGalpon.ID_Galpon} Actualizado";
-        }
-        public void OnPostUpdate_get()
-        {
-            var searchID = Request.Form["search"];
-            galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
-            if (galpon != null)
-            {
-                Message = "Se ha encontrado el galpon";
-                updateQueried = true;
-            }
-            else
-            {
-                Message = "No se ha encontrado galpon";
-            }
         }
         public void OnPostDelete()
         {
-            searchID = Request.Form["Delete_Search"];
+            searchID = Request.Form["TempID"];
             galpon = _repoGalpon.DeleteGalpon(int.Parse(searchID));
-            if (galpon != null)
-            {
-                Message = "Galpon eliminado con exito!";
-            }
-            else
-            {
-                Message = "El Galpon no existe";
-            }
         }
     }
 }
