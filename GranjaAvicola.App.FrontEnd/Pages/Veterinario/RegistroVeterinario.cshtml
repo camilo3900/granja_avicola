@@ -15,15 +15,11 @@
         TODO: Hay que volver los elementos de ahi Responsive utilizando Media Queries en el CSS
     *@
 
-    @*-
-        CRUD [Create]
-
-        Aqui esta todo el html para hacer una entrada nueva a la DB usa un form que tiene como
-        web handler el metodo read que esta definido en el modelo.
-    *@
-
     <div class="Transbox">
-        <header>
+
+        @if (!Model.updateQueried)
+        {
+            <header>
             <h1 class="display-5">Información Personal</h1>
         </header>
         <hr>
@@ -33,6 +29,13 @@
 
                 <form asp-page-handler="create" method="post">
                     <div class="FormContainer">
+
+                        @if (Model.CreateEntry)
+                        {                            
+                            <h3 class="clearfix">@Model.Message[0]</h3>
+                            <p>@Model.Message[1]</p> 
+                        }
+
                         <label for="NombreVeterinario">Nombre Completo</label>
                         <input name="NombreVeterinario" class="FormInput" id="NombreGalpon"
                             placeholder="Nombre y Apellido">
@@ -86,6 +89,43 @@
                 }
             </div>
         </Body>
+        }
+        else
+        {
+            <header>
+                <h1 class="display-5">Actualizar</h1>
+            </header>
+            <hr>
+            <Body>
+                <form asp-page-handler = "Update_set" method="post">
+                    <div class="FormContainer">
+
+                        <label>ID Persona</label>
+                        <input name="Update_VeterinarioID"   asp-for="persona.Id_Persona" autocomplete="off" class="FormInput" placeholder="ID" readonly>
+                        
+                        <label>Nombre Veterinario</label>
+                        <input name="Update_NombreVeterinario"      asp-for="persona.Nombre" autocomplete="off" class="FormInput" placeholder="Nombre">
+                        
+                        <label>Telefono</label>
+                        <input name="Update_Telefono"    asp-for="persona.Telefono" autocomplete="off" class="FormInput" placeholder="0" type="number">
+                        
+                        <label>Correo</label>
+                        <input name="Update_Correo"      asp-for="persona.Correo" autocomplete="off" class="FormInput" placeholder="Ejemplo@correo.com" type="email">
+                        
+                       @* Genero Insertar *@
+                    </div>
+                    
+                    <button class="btn btn-outline-secondary">
+                        Actualizar 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </button>
+                </form>
+                <a href="./RegistroVeterinario">Volver</a>
+            </Body>
+        }
+
     </div>
 
     @*-
@@ -180,25 +220,29 @@
 
 
                 <div style="display: flex; justify-content: space-around;">
-                    <button type="button" class="btn btn-outline-secondary">
-                        Editar
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-pencil" viewBox="0 0 16 16">
-                            <path
-                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                        </svg>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger">
-                        Eliminar
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
-                            <path
-                                d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
-                            <path
-                                d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-                        </svg>
-                    </button>
-                </div>
+                    @if (Model.persona != null && Model.searchQueried)
+                    {
+                        <form asp-page-handler="Update_get" method="post">
+                            <input type="hidden" name="TempID" asp-for="persona.Id_Persona">
+                            <button class="btn btn-outline-secondary">
+                                Editar
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                </svg>
+                            </button>
+                            <input type="hidden" value="31">
+                        </form>
+                        <form asp-page-handler="delete" method="post">
+                            <input type="hidden" name="TempID" asp-for="persona.Id_Persona">
+                            <button class="btn btn-outline-danger">
+                                Eliminar 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+                                    <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    }
             </div>
         </body>
     </div>

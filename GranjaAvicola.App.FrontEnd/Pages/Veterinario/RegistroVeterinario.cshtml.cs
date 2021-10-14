@@ -15,9 +15,11 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         public IEnumerable<Persona> personas {get; set;}
         public Persona persona {get; set;}
         public Persona Temporal {get; set;}
-        public string Message { get; set; } = "";
+        public string Message {get; set;} = "";
+        
         public string searchID {get;set;}
         public bool searchQueried {get; set;} = false;
+        public bool CreateEntry {get;set;} = false;
         public bool updateQueried {get; set;} = false;
         public bool upload {get; set;} = false;
 
@@ -44,6 +46,8 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             Temporal.ID_Rol = 2;
             Temporal = _repoPersona.AddPersona(Temporal);
             Message = "Veterinario subido con exito";
+            Message = $"ID referencia: {Temporal.Id_Persona}";
+            CreateEntry = true;
         }
         public void OnPostRead()
         {
@@ -68,14 +72,16 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             Temporal.Nombre = Request.Form["Update_NombreVeterinario"];
             Temporal.Telefono = int.Parse(Request.Form["Update_Telefono"]);
             Temporal.Correo = Request.Form["Update_Correo"];
+            Temporal.ID_Rol = 2;
             //Temporal.Genero = Request.Form["Update_Genero"];
             _repoPersona.UpdatePersona(Temporal);
             Message = $"Veterinario #{Temporal.Id_Persona} Actualizado";
         }
         public void OnPostUpdate_get()
         {
-            var searchID = Request.Form["search"];
+            var searchID = Request.Form["TempID"];
             persona = _repoPersona.GetPersona(int.Parse(searchID));
+            
             if (persona != null && persona.ID_Rol.Equals(2))
             {
                 Message = "Se ha encontrado el veterinario";
@@ -88,7 +94,7 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         }
         public void OnPostDelete()
         {
-            searchID = Request.Form["Delete_Search"];
+            searchID = Request.Form["TempID"];
             persona = _repoPersona.DeletePersona(int.Parse(searchID));
             if (persona != null && persona.ID_Rol.Equals(2))
             {
