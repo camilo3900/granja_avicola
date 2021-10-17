@@ -51,8 +51,15 @@ namespace GranjaAvicola.App.Persistent
 
         Persona IRepoPersona.GetPersona(int idPersona)
         {
-            return  _appContext.Persona.FirstOrDefault(g => g.Id_Persona== idPersona);
-            
+            try
+            {
+                return  _appContext.Persona.FirstOrDefault(g => g.Id_Persona== idPersona);   
+            }
+            catch (System.Exception)
+            {
+                return null;
+                throw;
+            }
         }
 
         Persona IRepoPersona.UpdatePersona(Persona Persona)

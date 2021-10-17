@@ -13,7 +13,9 @@ namespace GranjaAvicola.App.FrontEnd.Pages
     {
         private readonly IRepoGalpon _repoGalpon;
         private readonly IRepoGeoreferencias _repoGeoreferencia;
+        private readonly IRepoPersona _repoPersona;
         public Galpon galpon {get; set;}
+        public Persona veterinario {get; set;}
         public Galpon TemporalGalpon {get; set;}
         public Georeferencias georeferencia {get; set;}
         public Georeferencias Temporalgeoref {get; set;}
@@ -23,14 +25,14 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         public bool searchQueried {get; set;} = false;
         public bool UpdateState {get; set;} = false;
 
-        public RegistroControlGalponesModel(IRepoGalpon repoGalpon, IRepoGeoreferencias repoGeoreferencias)
+        public RegistroControlGalponesModel(IRepoGalpon repoGalpon, IRepoGeoreferencias repoGeoreferencias, IRepoPersona repoPersona)
         {
-            _repoGalpon=repoGalpon;
-            _repoGeoreferencia=repoGeoreferencias;
+            _repoGalpon = repoGalpon;
+            _repoGeoreferencia = repoGeoreferencias;
+            _repoPersona = repoPersona;
         }
         public void OnGet()
         {
-            
             galpon = new Galpon();
             georeferencia = new Georeferencias();
         }
@@ -57,12 +59,13 @@ namespace GranjaAvicola.App.FrontEnd.Pages
             TemporalGalpon = _repoGalpon.AddGalpon(TemporalGalpon);
             Message[0] = "Galpon subido con exito";
             Message[1] = $"ID referencia: {TemporalGalpon.ID_Galpon}";
+
             CreateEntry = true;
         }
         public void OnPostRead()
         {
+            veterinario = new Persona();
             searchID = Request.Form["SearchID"];
-            //galpon = new Galpon();
             galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
             searchQueried = true;
             if (galpon == null)
@@ -72,6 +75,10 @@ namespace GranjaAvicola.App.FrontEnd.Pages
             else
             {
                 georeferencia = _repoGeoreferencia.GetGeoreferencia(galpon.Georeferencia);
+                if (galpon.ID_VeterinarioCargo > 0)
+                {
+                    veterinario = _repoPersona.GetPersona(galpon.ID_VeterinarioCargo);
+                }
             }
 
         }

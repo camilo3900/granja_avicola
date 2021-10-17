@@ -12,70 +12,90 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
     public class RegistroVeterinarioModel : PageModel
     {        
         private readonly IRepoPersona _repoPersona;
-        public IEnumerable<Persona> personas {get; set;}
+        private readonly IRepoGalpon _repoGalpon;
         public Persona persona {get; set;}
-        public Persona Temporal {get; set;}
-        public string Message {get; set;} = "";
-        
+        public Galpon galpon {get; set;}
+        public Persona TemporalPersona {get; set;}
+        public string[] Message = new string[] {"", "", "", ""};       
         public string searchID {get;set;}
         public bool searchQueried {get; set;} = false;
         public bool CreateEntry {get;set;} = false;
-        public bool updateQueried {get; set;} = false;
-        public bool upload {get; set;} = false;
-
-        public RegistroVeterinarioModel(IRepoPersona repoPersona)
+        public bool UpdateState {get; set;} = false;
+        public RegistroVeterinarioModel(IRepoPersona repoPersona, IRepoGalpon repoGalpon)
         {
-            _repoPersona=repoPersona;
+            _repoPersona = repoPersona;
+            _repoGalpon = repoGalpon;
         }
         public void OnGet()
         {
             persona = new Persona();
         }
-        public void OnPost()
-        {
-
-        }
+        public void OnPost(){}
         public void OnPostCreate()
         {
-            Temporal = new Persona();
-            upload = true;
-            Temporal.Nombre = Request.Form["NombreVeterinario"];
-            Temporal.Telefono = int.Parse(Request.Form["Telefono"]);
-            Temporal.Correo = Request.Form["Correo"];
-            //Temporal.Genero = genero.Parse(Request.Form["Genero"]);
-            Temporal.ID_Rol = 2;
-            Temporal = _repoPersona.AddPersona(Temporal);
-            Message = "Veterinario subido con exito";
-            Message = $"ID referencia: {Temporal.Id_Persona}";
-            CreateEntry = true;
+            TemporalPersona = new Persona();
+            galpon = new Galpon();
+            TemporalPersona.Nombre = Request.Form["NombreVet"];
+            TemporalPersona.Apellido = Request.Form["ApellidoVet"];
+            TemporalPersona.Genero = Request.Form["GeneroVet"];
+            TemporalPersona.Telefono = long.Parse(Request.Form["TelefonoVet"]);
+            TemporalPersona.Correo = Request.Form["EmailVet"];
+            TemporalPersona.ID_Rol = 2;
+            
+
+            galpon = _repoGalpon.GetGalpon(int.Parse(Request.Form["IDCargo"]));
+            if (galpon != null)
+            {
+                TemporalPersona.ID_GalponAsignado = galpon.ID_Galpon;
+                TemporalPersona = _repoPersona.AddPersona(TemporalPersona);
+                
+                galpon.ID_VeterinarioCargo = TemporalPersona.Id_Persona;
+                
+                galpon = _repoGalpon.UpdateGalpon(galpon);
+                TemporalPersona = _repoPersona.UpdatePersona(TemporalPersona);
+                
+                Message[0] = "Veterinario subido con exito";
+                Message[1] = $"ID referencia: {TemporalPersona.Id_Persona}";
+                CreateEntry = true;
+            }
+            else
+            {
+                TemporalPersona.ID_GalponAsignado = 0;
+                TemporalPersona = _repoPersona.AddPersona(TemporalPersona);
+
+                Message[0] = "Veterinario subido con exito";
+                Message[1] = $"ID referencia: {TemporalPersona.Id_Persona} Error al asignar Galpon";
+                CreateEntry = true;
+            }
+
+
         }
         public void OnPostRead()
         {
-            searchID = Request.Form["lolaso"];
+            searchID = Request.Form["SearchID"];
             searchQueried = true;
-            //galpon = new Galpon();
             persona = _repoPersona.GetPersona(int.Parse(searchID));
            
             if (persona != null && persona.ID_Rol.Equals(2))
             {
-                Message = "Veterinario encontrado!"; 
+                Message[0] = "Veterinario encontrado!"; 
             }
             else
             {
-                Message = "GOD FUCKING DAMMIT KRIS WHERE THE FUCK ARE WE!?";
+                Message[0] = "GOD FUCKING DAMMIT KRIS WHERE THE FUCK ARE WE!?";
             }
         }
         public void OnPostUpdate_set()
         {
-            Temporal = new Persona();
-            Temporal.Id_Persona = int.Parse(Request.Form["Update_VeterinarioID"]);
-            Temporal.Nombre = Request.Form["Update_NombreVeterinario"];
-            Temporal.Telefono = int.Parse(Request.Form["Update_Telefono"]);
-            Temporal.Correo = Request.Form["Update_Correo"];
-            Temporal.ID_Rol = 2;
-            //Temporal.Genero = Request.Form["Update_Genero"];
-            _repoPersona.UpdatePersona(Temporal);
-            Message = $"Veterinario #{Temporal.Id_Persona} Actualizado";
+            TemporalPersona = new Persona();
+            TemporalPersona.Id_Persona = int.Parse(Request.Form["Update_VeterinarioID"]);
+            TemporalPersona.Nombre = Request.Form["Update_NombreVeterinario"];
+            TemporalPersona.Telefono = int.Parse(Request.Form["Update_Telefono"]);
+            TemporalPersona.Correo = Request.Form["Update_Correo"];
+            TemporalPersona.ID_Rol = 2;
+            //TemporalPersona.Genero = Request.Form["Update_Genero"];
+            _repoPersona.UpdatePersona(TemporalPersona);
+            Message[0] = $"Veterinario #{TemporalPersona.Id_Persona} Actualizado";
         }
         public void OnPostUpdate_get()
         {
@@ -84,12 +104,12 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             
             if (persona != null && persona.ID_Rol.Equals(2))
             {
-                Message = "Se ha encontrado el veterinario";
-                updateQueried = true;
+                Message[0] = "Se ha encontrado el veterinario";
+                UpdateState = true;
             }
             else
             {
-                Message = "No se ha encontrado veterinario";
+                Message[0] = "No se ha encontrado veterinario";
             }
         }
         public void OnPostDelete()
@@ -98,11 +118,11 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             persona = _repoPersona.DeletePersona(int.Parse(searchID));
             if (persona != null && persona.ID_Rol.Equals(2))
             {
-                Message = "Veterinario eliminado con exito!";
+                Message[0] = "Veterinario eliminado con exito!";
             }
             else
             {
-                Message = "El Veterinario no existe";
+                Message[0] = "El Veterinario no existe";
             }
         }
     }
