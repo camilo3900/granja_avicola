@@ -67,6 +67,7 @@ namespace GranjaAvicola.App.Persistent
                 PersonaEncontrado.Correo=Persona.Correo;
                 PersonaEncontrado.Genero=Persona.Genero;
                 PersonaEncontrado.ID_Rol=Persona.ID_Rol;
+                PersonaEncontrado.ID_GalponAsignado=Persona.ID_GalponAsignado;
 
                 
 
