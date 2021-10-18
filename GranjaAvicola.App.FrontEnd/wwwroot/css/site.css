@@ -52,6 +52,19 @@ th, td {
   justify-content: center;
 }
 
+.BoxContainerLine {
+  /*display: flex;*/
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.End{
+  /*display: flex;*/
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .Transbox {
   margin: 5px;
   background-color: rgba(255, 255, 255, 0.8);

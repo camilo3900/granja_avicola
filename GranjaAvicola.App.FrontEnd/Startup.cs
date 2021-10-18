@@ -28,6 +28,7 @@ namespace GranjaAvicola.App.Frontend
             services.AddSingleton<IRepoGalpon, RepoGalpon>();
             services.AddSingleton<IRepoPersona, RepoPersona>();
             services.AddSingleton<IRepoGeoreferencias, RepoGeoreferencias>();
+            services.AddSingleton<IRepoRegistro, RepoRegistro>();
              
         }
 
