@@ -146,19 +146,19 @@
                 <div>
                     <form asp-page-handler="read" method="post">
                         <label for="lolaso" style="padding-right: 1rem;">Buscar Operario</label>
-                        <input name="lolaso" @*list="SearchGalponID"*@ type="text"  class="FormInput" id="ComboBox"
+                        <input name="lolaso" list="SearchGalponID"   class="FormInput" id="ComboBox"
                             placeholder="-Buscar ID Operario-">
 
-                        @* <datalist id="SearchGalponID">
+                        <datalist id="SearchGalponID">
                             <option value="0001"></option> 
                             @foreach (var Per in Model.personas)
                             {
-                                if (Model.persona.ID_Rol.Equals(1))
+                                if (Per.ID_Rol.Equals(1))
                                 {
-                                    <option value="@Model.persona.Id_Persona">@Model.persona.Nombre</option>
+                                    <option value="@Per.Id_Persona">@Per.Nombre</option>
                                 }
                             }
-                        </datalist> *@
+                        </datalist> 
 
                         <button  class="btn btn-outline-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

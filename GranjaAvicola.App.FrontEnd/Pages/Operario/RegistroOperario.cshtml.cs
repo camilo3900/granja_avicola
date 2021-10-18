@@ -33,7 +33,8 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         public void OnGet()
         {
             persona = new Persona();
-            personas=_repoPersona.GetAllPersona();
+            personas = _repoPersona.GetAllPersona();
+            
         }
         public void OnPost()
         {
@@ -55,9 +56,11 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         }
         public void OnPostRead()
         {
+            personas = _repoPersona.GetAllPersona();
             searchID = Request.Form["lolaso"];
             searchQueried = true;
             //galpon = new Galpon();
+            
             persona = _repoPersona.GetPersona(int.Parse(searchID));
             
             

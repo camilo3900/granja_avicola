@@ -79,6 +79,7 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             if (persona != null && persona.ID_Rol.Equals(2))
             {
                 Message[0] = "Veterinario encontrado!"; 
+                galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
             }
             else
             {

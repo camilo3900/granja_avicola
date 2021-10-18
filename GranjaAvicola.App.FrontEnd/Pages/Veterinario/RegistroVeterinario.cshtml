@@ -141,8 +141,8 @@
 
                 @if (Model.searchQueried)
                 {
-                    <h3 class="clearfix">@Model.Message</h3>
-                    @if (Model.persona == null || Model.persona.ID_Rol.Equals(2))
+                    <h3 class="clearfix">@Model.Message[0]</h3>
+                    @if (Model.persona == null || Model.persona.ID_Rol.Equals(1))
                     {
                         <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS"
                     style="width:700px;height:500px;">
@@ -171,11 +171,11 @@
                                     </tr>
                                     <tr style="border-top: 3px solid #aaaaaa;">
                                         <th>ID Galpón Asignado:</th>
-                                        <td id="GalponAsignado">null</td>
+                                        <td id="GalponAsignado">@Model.galpon.ID_Galpon</td>
                                     </tr>
                                     <tr>
                                         <th>Nombre Galpón:</th>
-                                        <td id="GalponNombre">null</td>
+                                        <td id="GalponNombre">@Model.galpon.Nombre</td>
                                     </tr>
                                 </Table>
                             </div>
