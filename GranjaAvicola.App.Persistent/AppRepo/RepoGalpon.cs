@@ -62,13 +62,14 @@ namespace GranjaAvicola.App.Persistent
             var galponEncontrado = _appContext.Galpon.FirstOrDefault(g => g.ID_Galpon == galpon.ID_Galpon);
             if(galponEncontrado!=null)
             {
-                // galponEncontrado.Georeferencia=galpon.Georeferencia;
                 galponEncontrado.Nombre=galpon.Nombre;
+                galponEncontrado.Georeferencia=galpon.Georeferencia;
+                galponEncontrado.ID_OperarioCargo=galpon.ID_OperarioCargo;
+                galponEncontrado.ID_VeterinarioCargo=galpon.ID_VeterinarioCargo;
                 galponEncontrado.NumeroAnimales=galpon.NumeroAnimales;
                 galponEncontrado.FechaIngreso=galpon.FechaIngreso;
                 galponEncontrado.FechaSalida=galpon.FechaSalida;
                 
-
                 _appContext.SaveChanges();
             }
             return galponEncontrado;

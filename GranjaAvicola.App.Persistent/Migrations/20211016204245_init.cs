@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GranjaAvicola.App.Persistence.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,9 +65,10 @@ namespace GranjaAvicola.App.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Telefono = table.Column<int>(type: "int", nullable: false),
+                    Telefono = table.Column<long>(type: "bigint", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Genero = table.Column<int>(type: "int", nullable: false),
+                    Genero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ID_GalponAsignado = table.Column<int>(type: "int", nullable: false),
                     ID_Rol = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

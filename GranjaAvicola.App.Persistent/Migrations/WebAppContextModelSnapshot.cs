@@ -110,7 +110,10 @@ namespace GranjaAvicola.App.Persistence.Migrations
                     b.Property<string>("Correo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Genero")
+                    b.Property<string>("Genero")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ID_GalponAsignado")
                         .HasColumnType("int");
 
                     b.Property<int>("ID_Rol")
@@ -119,8 +122,8 @@ namespace GranjaAvicola.App.Persistence.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
+                    b.Property<long>("Telefono")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id_Persona");
 

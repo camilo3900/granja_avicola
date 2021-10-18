@@ -9,62 +9,57 @@
 </div>
 @* Un div pa meterle las 2 columnas *@
 <div class="BoxContainer">
-    @*
-        div para info personal
-        TODO: Hay que ajustar los ID de cada input.
-        TODO: Hay que volver los elementos de ahi Responsive utilizando Media Queries en el CSS
-    *@
 
     <div class="Transbox">
-
-        @if (!Model.updateQueried)
+        @if (!Model.UpdateState)
         {
             <header>
-            <h1 class="display-5">Información Personal</h1>
-        </header>
-        <hr>
+                <h1 class="display-5">Registro</h1>
+            </header>
+            <hr>
 
-        <Body>
-            <div class="row">
-
+            <Body>
                 <form asp-page-handler="create" method="post">
                     <div class="FormContainer">
-
                         @if (Model.CreateEntry)
                         {                            
                             <h3 class="clearfix">@Model.Message[0]</h3>
                             <p>@Model.Message[1]</p> 
                         }
 
-                        <label for="NombreVeterinario">Nombre Completo</label>
-                        <input name="NombreVeterinario" class="FormInput" id="NombreGalpon"
-                            placeholder="Nombre y Apellido">
-                        <span asp-validation-for=persona.Nombre class="text-danger"></span>
-
-                        <label for="Telefono">Telefono</label>
-                        <input name="Telefono" class="FormInput" id="NumeroAGalpon" placeholder="(000) 000 0000">
+                        <label>Nombre</label>
+                        <input name="NombreVet"     class="FormInput" autocomplete="off" placeholder="Nombre">
+                        
+                        <label>Apellidos</label>
+                        <input name="ApellidoVet"   class="FormInput" autocomplete="off" placeholder="Apellidos">
 
 
-                        <label for="genero">Genero</label>
-                        <select name="genero" class="FormInput" id="Genero">
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Bisexual">Bisexual</option>
-                            <option value="Intersexual">Intersexual</option>
-                            <option value="Pansexual">Pansexual</option>
-                            <option value="Transexual">Transexual</option>
+                        <label>Genero</label>
+                        <select name="GeneroVet"    class="FormInput">
+                            <option value="Masculino">      Masculino   </option>
+                            <option value="Femenino">       Femenino    </option>
+                            <option value="Bisexual">       Bisexual    </option>
+                            <option value="Intersexual">    Intersexual </option>
+                            <option value="Pansexual">      Pansexual   </option>
+                            <option value="Transexual">     Transexual  </option>
                         </select>
 
-                        <label for="correo">Correo</label>
-                        <input type="correo" class="FormInput" id="NumeroAGalpon" placeholder="Ejemplo@mail.com">
-                        <span asp-validation-for=persona.Correo class="text-danger"></span>
+                        <label>Telefono</label>
+                        <input name="TelefonoVet"   class="FormInput" autocomplete="off" placeholder="000 000 0000">
 
+                        <label>Correo</label>
+                        <input name="EmailVet"      class="FormInput" autocomplete="off" placeholder="Ejemplo@email.com" type="email">
                     </div>
 
-                    @* </div> *@
-                    <button type="submit" class="btn btn-outline-secondary">
+                        <hr>
+
+                    <div class="FormContainer">
+                        <label>Id Galpon a cargo</label>
+                        <input name="IDCargo"   class="FormInput" autocomplete="off" placeholder="Id Galpon">
+                    </div>
+
+                    <button class="btn btn-outline-secondary">
                         Registrar
-                        @*<input type="submit"> @*Input metido en el botton *@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-person-plus" viewBox="0 0 16 16">
                             <path
@@ -74,21 +69,7 @@
                         </svg>
                     </button>
                 </form>
-
-
-                @if (Model.upload)
-                {
-                    <div style="padding-left: 50px;">
-                        <h3 class="clearfix">@Model.Message</h3>
-                        <p>ID Veterinario: <strong>@Model.Temporal.Id_Persona</strong></p>
-                        <p>Nombre Veterinario: <strong>@Model.Temporal.Nombre</strong></p>
-                        <p>Telefono: <strong>@Model.Temporal.Telefono</strong></p>
-                        <p>Correo: <strong>@Model.Temporal.Correo</strong></p>
-                        <p>Genero: <strong>@Model.Temporal.Genero</strong></p>
-                    </div>
-                }
-            </div>
-        </Body>
+            </Body>
         }
         else
         {
@@ -112,7 +93,6 @@
                         <label>Correo</label>
                         <input name="Update_Correo"      asp-for="persona.Correo" autocomplete="off" class="FormInput" placeholder="Ejemplo@correo.com" type="email">
                         
-                       @* Genero Insertar *@
                     </div>
                     
                     <button class="btn btn-outline-secondary">
@@ -145,20 +125,9 @@
             <div class="FormContainer">
                 <div>
                     <form asp-page-handler="read" method="post">
-                        <label for="lolaso" style="padding-right: 1rem;">Buscar Veterinario</label>
-                        <input name="lolaso" @*list="SearchGalponID"*@ type="text" class="FormInput" id="ComboBox"
+                        <label style="padding-right: 1rem;">Buscar Veterinario</label>
+                        <input name="SearchID" type="text" class="FormInput" id="ComboBox"
                             placeholder="-Buscar ID Veterinario-">
-
-                        @* <datalist id="SearchGalponID">
-                            <option value="0001"></option> 
-                            @foreach (var Persona in Model.persona)
-                            {
-                                if (Model.persona.ID_Rol.Equals(2))
-                                {
-                                    <option value="@Model.persona.Id_Persona">@Model.persona.Nombre</option>
-                                }
-                            }
-                        </datalist> *@
 
                         <button  class="btn btn-outline-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -169,14 +138,11 @@
                         </button>
                     </form>
                 </div>
-                
-                
-
 
                 @if (Model.searchQueried)
                 {
                     <h3 class="clearfix">@Model.Message</h3>
-                    @if (Model.persona == null || Model.persona.ID_Rol.Equals(1))
+                    @if (Model.persona == null || Model.persona.ID_Rol.Equals(2))
                     {
                         <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS"
                     style="width:700px;height:500px;">

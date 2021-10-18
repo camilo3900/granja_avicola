@@ -16,7 +16,6 @@
         <form asp-page-handler="create" method="post">
             <label> Nombre Veterinario </label>
             <input type="text" name="NombreVeterinario" class="FormInput" id="NombreGalpon" placeholder="Nombre">
-            @* Validacion *@
             <span asp-validation-for=persona.Nombre class="text-danger" ></span>
             <label for="Telefono"> Telefono</label>
             <input type="text" name="Telefono" class="FormInput" id="NumeroAGalpon" placeholder="(000)000-000">
@@ -24,7 +23,7 @@
             <input type="email" name="Correo" class="FormInput" id="NumeroAGalpon" placeholder="nombre@ejemplo.com">
 
             <label for="Genero"> Genero </label>
-            <select name ="Genero" asp-for="persona.Genero" class="FormInput" id="Genero">
+            <select name ="Genero" class="FormInput" id="Genero">
                 <option value="Masculino">Masculino</option>
                 <option value="Femenino">Femenino</option>
                 <option value="Bisexual">Bisexual</option>
@@ -61,7 +60,7 @@
     <h1> Buscar ID Veterinario </h1>
     <div>
         <form asp-page-handler="read" method="post">
-            <input type="hidden" name="lolaso"  asp-for = "persona.Id_Persona">
+            <input name="lolaso">
             <button class="btn btn-outline-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
                     viewBox="0 0 16 16">
