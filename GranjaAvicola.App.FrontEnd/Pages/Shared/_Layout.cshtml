@@ -49,7 +49,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="Veterinario">
                                     <a class="dropdown-item" asp-area="" asp-page="/Veterinario/RegistroVeterinario">Administrar</a>
-                                    <a class="dropdown-item" href="/Veterinario/listadoVeterinario">Veterinarios</a>
+                                    <a class="dropdown-item" asp-page="/Veterinario/listadoVeterinario">Veterinarios</a>
                                 </div>
                             </div>
                         </li>
@@ -60,18 +60,15 @@
                                     Operario
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="Operario">
-                                    <a class="dropdown-item" asp-area="" asp-page="/Operario/RegistroOperario">Registro</a>
-                                    <a class="dropdown-item" href="/Operario/listadoOperario">Listado</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Operario/RegistroOperario">Administrar</a>
+                                    <a class="dropdown-item" asp-page="/Operario/listadoOperario">Operarios</a>
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-area="" asp-page="/Operario/RegistroVariables">Registro Variables</a>
 
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/test">P R U E B A S</a>
-                        </li>
                     </ul>
-
                 </div>
             </div>
 

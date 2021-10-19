@@ -13,14 +13,19 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
     {        
         private readonly IRepoPersona _repoPersona;
         private readonly IRepoGalpon _repoGalpon;
+
         public Persona persona {get; set;}
         public Galpon galpon {get; set;}
         public Persona TemporalPersona {get; set;}
+
         public string[] Message = new string[] {"", "", "", ""};       
+
         public string searchID {get;set;}
+        
         public bool searchQueried {get; set;} = false;
         public bool CreateEntry {get;set;} = false;
         public bool UpdateState {get; set;} = false;
+        public bool UpdateEntry {get; set;} = false;
         public RegistroVeterinarioModel(IRepoPersona repoPersona, IRepoGalpon repoGalpon)
         {
             _repoPersona = repoPersona;
@@ -29,10 +34,12 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         public void OnGet()
         {
             persona = new Persona();
+            Message[0] = "Registro";
         }
         public void OnPost(){}
         public void OnPostCreate()
         {
+            Message[0] = "Registro";
             TemporalPersona = new Persona();
             galpon = new Galpon();
             TemporalPersona.Nombre = Request.Form["NombreVet"];
@@ -54,8 +61,8 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
                 galpon = _repoGalpon.UpdateGalpon(galpon);
                 TemporalPersona = _repoPersona.UpdatePersona(TemporalPersona);
                 
-                Message[0] = "Veterinario subido con exito";
-                Message[1] = $"ID referencia: {TemporalPersona.Id_Persona}";
+                Message[1] = "Veterinario subido con exito";
+                Message[2] = $"ID referencia: {TemporalPersona.Id_Persona}";
                 CreateEntry = true;
             }
             else
@@ -63,8 +70,8 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
                 TemporalPersona.ID_GalponAsignado = 0;
                 TemporalPersona = _repoPersona.AddPersona(TemporalPersona);
 
-                Message[0] = "Veterinario subido con exito";
-                Message[1] = $"ID referencia: {TemporalPersona.Id_Persona} Error al asignar Galpon";
+                Message[1] = "Veterinario subido con exito";
+                Message[2] = $"ID referencia: {TemporalPersona.Id_Persona} Error al asignar Galpon";
                 CreateEntry = true;
             }
 
@@ -72,6 +79,7 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         }
         public void OnPostRead()
         {
+            Message[0] = "Registro";
             galpon = new Galpon();
             searchID = Request.Form["SearchID"];
             persona = _repoPersona.GetPersona(int.Parse(searchID));
@@ -79,44 +87,81 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             if (persona != null && persona.ID_Rol.Equals(2))
             {
                 galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
-                Message[0] = "Veterinario encontrado!"; 
+                Message[3] = "Veterinario encontrado!"; 
                 galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
             }
             else
             {
-                Message[0] = "Galpon no encontrado.";
+                Message[3] = "Veterinario no encontrado.";
             }
             searchQueried = true;
         }
         public void OnPostUpdate_set()
         {
+            Message[0] = "Registrar";
             TemporalPersona = new Persona();
+            galpon = new Galpon();
+
             TemporalPersona.Id_Persona = int.Parse(Request.Form["Update_VeterinarioID"]);
-            TemporalPersona.Nombre = Request.Form["Update_NombreVeterinario"];
-            TemporalPersona.Telefono = int.Parse(Request.Form["Update_Telefono"]);
-            TemporalPersona.Correo = Request.Form["Update_Correo"];
+            TemporalPersona.Nombre = Request.Form["Update_NombreVet"];
+            TemporalPersona.Apellido = Request.Form["Update_ApellidoVet"];
+            TemporalPersona.Genero = Request.Form["Update_GeneroVet"];
+            TemporalPersona.Telefono = long.Parse(Request.Form["Update_TelefonoVet"]);
+            TemporalPersona.Correo = Request.Form["Update_EmailVet"];
             TemporalPersona.ID_Rol = 2;
-            //TemporalPersona.Genero = Request.Form["Update_Genero"];
-            _repoPersona.UpdatePersona(TemporalPersona);
-            Message[0] = $"Veterinario #{TemporalPersona.Id_Persona} Actualizado";
+
+            galpon = _repoGalpon.GetGalpon(int.Parse(Request.Form["Update_IDCargo"]));
+            if (galpon != null)
+            {
+                TemporalPersona.ID_GalponAsignado = galpon.ID_Galpon;
+                galpon.ID_VeterinarioCargo = TemporalPersona.Id_Persona;
+                
+                galpon = _repoGalpon.UpdateGalpon(galpon);
+                TemporalPersona = _repoPersona.UpdatePersona(TemporalPersona);
+                
+                Message[1] = "Veterinario actualizado con exito";
+                Message[2] = $"Id Veterinario: {TemporalPersona.Id_Persona}";
+                UpdateEntry = true;
+            }
+            else
+            {
+                TemporalPersona.ID_GalponAsignado = 0;
+                
+                TemporalPersona = _repoPersona.UpdatePersona(TemporalPersona);
+
+                Message[1] = $"Veterinario {TemporalPersona.Id_Persona} actualizado con exito";
+                Message[2] = "Error al asignar Galpon (Galpon no encontrado)";
+                UpdateEntry = true;
+            }
+
         }
         public void OnPostUpdate_get()
         {
+            Message[0] = "Actualizar";
             var searchID = Request.Form["TempID"];
             persona = _repoPersona.GetPersona(int.Parse(searchID));
             UpdateState = true;
         }
         public void OnPostDelete()
         {
+            Message[0] = "Registro";
             searchID = Request.Form["TempID"];
             persona = _repoPersona.DeletePersona(int.Parse(searchID));
+            UpdateEntry = true;
             if (persona != null && persona.ID_Rol.Equals(2))
             {
-                Message[0] = "Veterinario eliminado con exito!";
+                if(persona.ID_GalponAsignado > 0)
+                {
+                    galpon = new Galpon();
+                    galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
+                    galpon.ID_VeterinarioCargo = 0;
+                    galpon = _repoGalpon.UpdateGalpon(galpon);
+                }
+                Message[1] = "Veterinario eliminado con exito!";
             }
             else
             {
-                Message[0] = "El Veterinario no existe";
+                Message[1] = "El Veterinario no existe";
             }
         }
     }

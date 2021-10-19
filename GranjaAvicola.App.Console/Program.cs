@@ -57,7 +57,7 @@ namespace GranjaAvicola.App.Console
             var diagnostico = new Diagnostico
             {
                 DiagnosticoVet = "Diagnotico 1.0",
-                Sugerencia = "New Sugerencia"
+                //Sugerencia = "New Sugerencia"
 
 
             };

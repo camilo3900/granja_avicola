@@ -67,7 +67,6 @@ namespace GranjaAvicola.App.Persistent
             var PersonaEncontrado = _appContext.Persona.FirstOrDefault(g => g.Id_Persona == Persona.Id_Persona);
             if(PersonaEncontrado!=null)
             {
-                // PersonaEncontrado.Georeferencia=Persona.Georeferencia;
                 PersonaEncontrado.Nombre=Persona.Nombre;
                 PersonaEncontrado.Apellido = Persona.Apellido;
                 PersonaEncontrado.Telefono=Persona.Telefono;
@@ -75,9 +74,6 @@ namespace GranjaAvicola.App.Persistent
                 PersonaEncontrado.Genero=Persona.Genero;
                 PersonaEncontrado.ID_Rol=Persona.ID_Rol;
                 PersonaEncontrado.ID_GalponAsignado=Persona.ID_GalponAsignado;
-
-                
-
                 _appContext.SaveChanges();
             }
             return PersonaEncontrado;
