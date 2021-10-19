@@ -8,306 +8,157 @@
     <h1 class="display-5"> Registro Variables </h1>
 </div>
 
-<div class="BoxContainerLine">
-    <div class="Transbox">
-        <header>
-            <h1 class="display-5">Seleccionar Operario</h1>
-        </header>
-        <hr>
+<div class="Transbox">
+    <header>
+        <h1 class="display-5">Seleccionar Operario</h1>
+    </header>
+    <hr>
 
-        <body>
+    <body>
 
-            <div class="FormContainer">
-                <div>
-                    <form asp-page-handler="read" method="post">
-                        <label for="lolaso" style="padding-right: 1rem;">Buscar Operario</label>
-                        <input name="lolaso" type="text" @*list="SearchGalponID"*@ autocomplete="off" class="FormInput" id="ComboBox"
-                            placeholder="-Buscar ID Operario-">
-                            
+        <div class="FormContainer">
+                <form asp-page-handler="read" method="post">
+                    <label for="IDSearch" style="padding-right: 1rem;">Buscar Operario</label>
+                    <input name="IDSearch" type="text" @*list="SearchGalponID"*@ autocomplete="off" class="FormInput" id="ComboBox" placeholder="-Buscar ID Operario-">
 
-                        @*<datalist id="SearchGalponID">
-                            <option value="2">2</option>
-                            @* @foreach (var Per in Model.personas)
-                                {
-                                if (Per.ID_Rol.Equals(1))
-                                {
-                                <option value="@Per.Id_Persona">@Per.Nombre</option>
-                                }
-                                } 
-                        </datalist> *@
-
-                        <button class="btn btn-outline-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg>
-                        </button>
-
-                    </form>
-                </div>
-
-
-
-
-                @if (Model.searchQueried)
-                {
-
-                    @if (Model.persona == null || Model.persona.ID_Rol.Equals(2))
-                    {
-                        <h3 class="clearfix">@Model.Message</h3>
-                    }
-                    else
-                    {
-                        if (Model.persona.ID_Rol.Equals(1))
-                        {
-                            <div style="margin-bottom: 2rem;">
-                                <Table class="infoTable">
-                                    <tr>
-                                        <th>Nombres:</th>
-                                        <td id="OperarioNombre">@Model.persona.Nombre</td>
-                                        <input type="hidden" name="ID_Trabajador" asp-for="persona.Id_Persona">
-                                    </tr>
-                                    <tr>
-                                        <th>ID Galpon</th>
-                                        <td id="OperarioTelefono"> @Model.galpon.ID_Galpon</td>
-                                        <input type="hidden" name="ID_Galpon" asp-for="galpon.ID_Galpon">
-
-                                    </tr>
-                                    <tr>
-                                        <th>Galpon Asignado</th>
-                                        <td id="OperarioTelefono">@Model.galpon.Nombre </td>
-
-                                    </tr>
-                                </Table>
-                            </div>
-
-                        }
-                    }
-                }
-
-
-                <div style="display: flex; justify-content: space-around;">
-                    @if (Model.persona != null && Model.searchQueried)
-                    {
-                        <form asp-page-handler="Update_get" method="post">
-                            <input type="hidden" name="TempID" asp-for="persona.ID_GalponAsignado">
-                            <input type="hidden" name="add" asp-for="persona.ID_GalponAsignado">
-                            <input type="hidden" name="ID_Trabajador" asp-for="persona.Id_Persona">
-                            <input type="hidden" name="ID_Galpon" asp-for="persona.ID_GalponAsignado">
-                            
-
-                            <button class="btn btn-outline-secondary">
-                                Agregar Variable
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path
-                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <input type="hidden" value="31">
-                            
-                        </form>
-
-                        <form asp-page-handler="readGalpon" method="post">
-                            <input type="hidden" name="TemoID" asp-for="persona.ID_GalponAsignado">
-                            <input type="hidden" name="search" asp-for="persona.ID_GalponAsignado">
-                            <input type="hidden" name="ID_Trabajador" asp-for="persona.Id_Persona">
-                            <button class="btn btn-outline-secondary">
-                                Lista de Variables  
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path
-                                    d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <input type="hidden" value="31">
-                        </form>
-
-                    }
-                </div>
-        </body>
-
-    </div>
-
-</div>
-
-@if (Model.add == 0) { }
-else
-{
-
-
-    <div class="Transbox">
-        <header>
-            <h1 class="display-5">Agregar Variable</h1>
-        </header>
-        <hr>
-
-        <Body>
-
-
-            <form asp-page-handler="create" method="post">
-                <div class="FormContainer">
-
-
-                    @if (Model.CreateEntry)
-                    {
-                        <h3 class="clearfix">@Model.Message</h3>
-                        <p>@Model.Message</p>
-                    }
-
-                    <label for="ID_Trabajador">ID Trabajador </label>
-                    <input name="ID_Trabajador" class="FormInput" id="NombreGalpon" value=@Model.ID_Trabajador readonly>
-                    <label for="ID_Galpon">ID Galpon Asignado</label>
-                    <input name="ID_Galpon" class="FormInput" id="NombreGalpon" value=@Model.ID_Galpon readonly>
-                    <label for="Temperatura">Temperatura </label>
-                    <input name="Temperatura" class="FormInput" id="NombreGalpon" placeholder="38">
-                    <label for="Agua">Agua</label>
-                    <input name="Agua" class="FormInput" id="NombreGalpon" placeholder="500">
-                    <label for="Alimento">Alimento</label>
-                    <input name="Alimento" class="FormInput" id="NombreGalpon" placeholder="38">
-                    <label for="PromedioHuevos">Promedio Huevos</label>
-                    <input name="PromedioHuevos" class="FormInput" id="NombreGalpon" placeholder="25">
-                    <label for="GallinasEnfermas">Gallinas Enfermas</label>
-                    <input name="GallinasEnfermas" class="FormInput" id="NombreGalpon" placeholder="3">
-
-                    @* <input name="ID_Trabajador"   asp-for="Model.persona.Id_Persona" autocomplete="off" class="FormInput" placeholder="ID" readonly>
-                    <input name="ID_Galpon"   asp-for="Model.persona.ID_GalponAsignado" autocomplete="off" class="FormInput" placeholder="ID" readonly> *@
-
-
-                    @* </div> *@
-                    <button type="submit" class="btn btn-outline-secondary">
-                        Registrar
-                        @*<input type="submit"> @*Input metido en el botton *@
+                    <button class="btn btn-outline-secondary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-person-plus" viewBox="0 0 16 16">
+                            class="bi bi-search" viewBox="0 0 16 16">
                             <path
-                            d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                            <path fill-rule="evenodd"
-                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                         </svg>
                     </button>
-                </div>
-            </form>
+                </form>
 
-        </Body>
-    </div>
-
-
-
-
-}
-
-@if (Model.search == 0) { }
-else
-{
-
-    <div class="Transbox">
-        <header>
-            <h1 class="display-5">Lista Variable</h1>
-        </header>
-        <hr>
-
-        <body>
-
-            <div class="FormContainer">
-
-
-                @if (Model.searchQueried2)
+            @if (Model.found)
+            {
+                if(Model.persona == null || Model.persona.ID_Rol == 2)
                 {
                     <h3 class="clearfix">@Model.Message</h3>
-
-                    
-                    @if (@Model.request == false)
+                }
+                else
+                {
+                    <h3 class="clearfix">Información:</h3>
+                    <table>
+                        <tr>
+                            <th> Nombre Operario: </th>
+                            <td>@Model.persona.Nombre @Model.persona.Apellido</td>
+                        </tr>
+                        <tr>
+                            <th> Galpon a cargo: </th>
+                            <td>@Model.galpon.Nombre</td>
+                        </tr>
+                        <tr>
+                            <th> Id Galpon: </th>
+                            <td>@Model.galpon.ID_Galpon</td>
+                        </tr>
+                    </table>
+                    if(Model.state == 0)
                     {
-                        <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS"
-                style="width:700px;height:500px;">
+                        <div style="display: flex; justify-content: space-evenly; margin-top: 10px;">
+                            <form asp-page-handler="CreateNew" method="post">
+                                <input type="hidden" name="ID_Operario" asp-for="persona.Id_Persona">
+                                <input type="hidden" name="ID_Galpon" asp-for="persona.ID_GalponAsignado">
+                                <button class="btn btn-outline-secondary">
+                                    Agregar Variable
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path
+                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <form asp-page-handler="entryHistory" method="post">
+                                <input type="hidden" name="ID_Operario"   asp-for="persona.Id_Persona">
+                                <input type="hidden" name="ID_Galpon"       asp-for="persona.ID_GalponAsignado">
+                                <button class="btn btn-outline-secondary">
+                                    Lista de Variables  
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-stars" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.277.277 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.267.267 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.277.277 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.271.271 0 0 0 .259-.194l.162-.53z"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>            
+                        @if(Model.upload)
+                        {
+                            <h3 class="clearfix">@Model.Message</h3>
+                        }
                     }
-                    else
+                    if(Model.state == 1)
                     {
+                        <h1 class="display-5">Agregar Variable</h1>
                         
+                        <form asp-page-handler="addEntry" method="post">
+                            <div style="display:flex; align-items: baseline; justify-content: space-around;">
+                                <div class="FormContainer">
+                                    <label>ID Operario</label>
+                                    <input type="number" name="ID_Operario"       class="FormInput" readonly asp-for="persona.Id_Persona">
+                                    
+                                    <label for="Temperatura">Temperatura </label>
+                                    <input type="number" name="Temperatura"         class="FormInput" placeholder="Temperatura (°C)">
+                                
+                                    <label for="Alimento">Alimento</label>
+                                    <input type="number" name="Alimento"            class="FormInput" placeholder="Cantidad (kg)">
 
-                        <div style="margin-bottom: 2rem;">
-                            <Table class="infoTable">
+                                    <label for="GallinasEnfermas">Gallinas Enfermas</label>
+                                    <input type="number" name="GallinasEnfermas"    class="FormInput" placeholder="Gallinas enfermas">
+                                </div>
 
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID </th>
-                                        <th scope="col">Temperatura </th>
-                                        <th scope="col">Agua</th>
-                                        <th scope="col">Alimento</th>
-                                        <th scope="col">Promedio Huevos</th>
-                                        <th scope="col">Gallinas Enfermas</th>
-                                        <th scope="col">Fecha Registro</th>
-                                        <th scope="col">ID Trabajador</th>
+                                <div class="FormContainer">
+                                    <label for="ID_Galpon">ID Galpon Asignado</label>
+                                    <input type="number" name="ID_Galpon"           class="FormInput" readonly asp-for="galpon.ID_Galpon">
+                                    
+                                    <label for="Agua">Agua</label>
+                                    <input type="number" name="Agua"                class="FormInput" placeholder="Cantidad (L)">
+                                
+                                    <label for="PromedioHuevos">Promedio Huevos</label>
+                                    <input type="number" name="PromedioHuevos"      class="FormInput" placeholder="Promedio Huevos">
 
-
-
-
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach (var Per in Model.registros)
-                                    {
-                                        if (Per.ID_Galpon.Equals(@Model.galpon.ID_Galpon))
-                                        {   
-                                            @*
-                                            Hacer responsive
-                                             *@
-                                            <tr>
-                                                <td style="text-align: left;">@Per.Id_Registro </td>
-                                                <td style="text-align: left;">@Per.Temperatura </td>
-                                                <td style="text-align: left;">@Per.Agua</td>
-                                                <td style="text-align: left;">@Per.Alimento</td>
-                                                <td style="text-align: left;">@Per.PromedioHuevos</td>
-                                                <td style="text-align: left;">@Per.GallinasEnfermas</td>
-                                                <td style="text-align: left;">@Per.FechaRegistro</td>
-                                                <td style="text-align: left;">@Per.ID_Trabajador</td>
-                                                
-
-                                            </tr>
-                                        }
-                                        
+                                    <button class="btn btn-outline-secondary" style="margin-top: 2rem;">
+                                        Registrar
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    if(Model.state == 2)
+                    {
+                        <h1 class="display-5">Historial Registros</h1>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Temperatura (c°)</th>
+                                    <th scope="col">Agua (L)</th>
+                                    <th scope="col">Alimento (Kg)</th>
+                                    <th scope="col">Prom Huevos</th>
+                                    <th scope="col">Enfermas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var reg in Model.registros)
+                                { 
+                                    if(reg.ID_Trabajador.Equals(Model.persona.Id_Persona)){
+                                        <tr>
+                                            <td style="text-align: left;">@reg.Id_Registro</td>
+                                            <td style="text-align: left;">@reg.Temperatura </td>
+                                            <td style="text-align: left;">@reg.Agua </td>
+                                            <td style="text-align: left;">@reg.Alimento </td>
+                                            <td style="text-align: left;">@reg.PromedioHuevos</td>
+                                            <td style="text-align: left;">@reg.GallinasEnfermas</td>
+                                        </tr>
                                     }
                                 }
                             </tbody>
-                        </Table>
-                    </div>
-                }
-
-
-                <div style="display: flex; justify-content: space-around;">
-                    @if (Model.registro != null && Model.searchQueried)
-                    {
-                        <form asp-page-handler="Update_get" method="post">
-                            <input type="hidden" name="TempID" asp-for="registro.Id_Registro">
-                            <button class="btn btn-outline-secondary">
-                                Editar
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-pencil" viewBox="0 0 16 16">
-                                    <path
-                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                                </svg>
-                            </button>
-                            <input type="hidden" value="31">
-                        </form>
-                        <form asp-page-handler="delete" method="post">
-                            <input type="hidden" name="TempID" asp-for="registro.Id_Registro">
-                            <button class="btn btn-outline-danger">
-                                Eliminar
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
-                                    <path
-                                d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
-                                    <path
-                                d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
-                                </svg>
-                            </button>
-                        </form>
+                        </table>
                     }
-                </div>
-        </body>
-    </div>
-}
+                }
+            }          
+    </body>
+</div>

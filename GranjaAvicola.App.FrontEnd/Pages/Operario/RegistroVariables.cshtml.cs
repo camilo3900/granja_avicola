@@ -14,28 +14,19 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         private readonly IRepoPersona _repoPersona;
         private readonly IRepoGalpon _repoGalpon;
         private readonly IRepoRegistro _repoRegistro;
-        public IEnumerable<Persona> personas {get; set;}
-        public IEnumerable<Registro> registros {get; set;}
 
         public Galpon galpon {get; set;}
         public Persona persona {get; set;}
         public Registro registro {get;set;}
-        public Registro Temporal {get; set;}
+        public Registro TemporalRegistro {get; set;}
+        public IEnumerable<Registro> registros{get; set;}
+        
         public string Message {get; set;} = "";
         
-        public string searchID {get;set;} ="";
-        public int ID_Galpon {get;set;} = 0;
-        public int ID_Trabajador {get;set;} = 0;
-        public int add {get;set;} = 0;
-        public int search {get;set;} = 0;
-        public bool searchQueried {get; set;} = false;
-         public bool searchQueried2 {get; set;} = false;
-        public bool CreateEntry {get;set;} = false;
-        public bool updateQueried {get; set;} = false;
+        public string searchID {get;set;}
+        public bool found {get; set;} = false;
+        public int state {get; set;} = 0;
         public bool upload {get; set;} = false;
-        public bool request {get; set;} = false;
-
-         
 
         public RegistroVariablesModel(IRepoPersona repoPersona, IRepoGalpon repoGalpon, IRepoRegistro repoRegistro)
         {
@@ -47,138 +38,68 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         {
             persona = new Persona();
             registro = new Registro();
-            personas = _repoPersona.GetAllPersona();
-            registros = _repoRegistro.GetAllRegistro();
-
-            
         }
         public void OnPost()
         {
 
         }
-        public void OnPostCreate()
-        {
-            Temporal = new Registro();
-            upload = true;
-            searchID = Request.Form["lolaso"];
-            
-
-            Temporal.ID_Galpon = int.Parse(Request.Form["ID_Galpon"]);
-            Temporal.ID_Trabajador = int.Parse(Request.Form["ID_Trabajador"]);
-            Temporal.Temperatura = double.Parse(Request.Form["Temperatura"]);
-            Temporal.Agua = double.Parse(Request.Form["Agua"]);
-            Temporal.Alimento = double.Parse(Request.Form["Alimento"]);
-            Temporal.PromedioHuevos = int.Parse(Request.Form["PromedioHuevos"]);
-            Temporal.GallinasEnfermas = int.Parse(Request.Form["GallinasEnfermas"]);
-            
-            Temporal = _repoRegistro.AddRegistro(Temporal);
-            Message = "Registro subido con exito";
-            Message = $"ID referencia: {Temporal.Id_Registro}";
-            CreateEntry = true;
-        }
         public void OnPostRead()
         {
-            personas = _repoPersona.GetAllPersona();
-            registros = _repoRegistro.GetAllRegistro();
-
-            searchID = Request.Form["lolaso"];
-            
-            searchQueried = true;
-            
-            //galpon = new Galpon();
-            
+            searchID = Request.Form["IDSearch"];
             persona = _repoPersona.GetPersona(int.Parse(searchID));
             
-            
-           
-            if (persona != null && persona.ID_Rol.Equals(1))
+            if (persona != null && persona.ID_Rol.Equals(1) && persona.ID_GalponAsignado > 0)
             {
-                Message = "Operario encontrado!"; 
+                Message = "Informacion:"; 
                 galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
             }
             else
             {
-                Message = "GOD FUCKING DAMMIT KRIS WHERE THE FUCK ARE WE!?";
+                Message = "No se encontro operario o no tiene galpón asignado aún";
             }
-            
+            found = true;
+            state = 0;
         }
-
-        public void OnPostReadGalpon()
+        public void OnPostCreateNew()
         {
-            personas = _repoPersona.GetAllPersona();
+            found = true;
+            galpon = _repoGalpon.GetGalpon(int.Parse(Request.Form["ID_Galpon"]));
+            persona = _repoPersona.GetPersona(int.Parse(Request.Form["ID_Operario"]));
+            state = 1;
+        }
+        public void OnPostAddEntry()
+        {
+            found = true;
+            galpon = _repoGalpon.GetGalpon(int.Parse(Request.Form["ID_Galpon"]));
+            persona = _repoPersona.GetPersona(int.Parse(Request.Form["ID_Operario"]));
+            
+            TemporalRegistro = new Registro();
+            state = 0;
+
+            
+            TemporalRegistro.ID_Trabajador = int.Parse(Request.Form["ID_Operario"]);
+            TemporalRegistro.ID_Galpon = int.Parse(Request.Form["ID_Galpon"]);
+
+            TemporalRegistro.FechaRegistro = DateTime.Now;
+
+            TemporalRegistro.Temperatura = double.Parse(Request.Form["Temperatura"]);
+            TemporalRegistro.Agua = double.Parse(Request.Form["Agua"]);
+            TemporalRegistro.Alimento = double.Parse(Request.Form["Alimento"]);
+            TemporalRegistro.PromedioHuevos = int.Parse(Request.Form["PromedioHuevos"]);
+            TemporalRegistro.GallinasEnfermas = int.Parse(Request.Form["GallinasEnfermas"]);
+            
+            TemporalRegistro = _repoRegistro.AddRegistro(TemporalRegistro);
+            Message = $"Registro {TemporalRegistro.Id_Registro} subido con exito";
+            upload = true;
+        }
+        public void OnPostEntryHistory()
+        {
+            found = true;
+            galpon = _repoGalpon.GetGalpon(int.Parse(Request.Form["ID_Galpon"]));
+            persona = _repoPersona.GetPersona(int.Parse(Request.Form["ID_Operario"]));
+
             registros = _repoRegistro.GetAllRegistro();
-
-            search = int.Parse(Request.Form["search"]);
-            ID_Trabajador = int.Parse(Request.Form["ID_Trabajador"]);
-            
-            searchQueried2 = true;
-            persona = _repoPersona.GetPersona(ID_Trabajador);
-            
-            //galpon = new Galpon();
-            foreach (var Per in registros){
-                if(persona.ID_GalponAsignado.Equals(Per.ID_Galpon))
-                {
-                    request = true;
-                }        
-            }
-            
-            
-            
-            
-           
-            if (persona != null && persona.ID_Rol.Equals(1))
-            {
-                Message = "Operario encontrado!"; 
-                galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
-            }
-            else
-            {
-                Message = "GOD FUCKING DAMMIT KRIS WHERE THE FUCK ARE WE!?";
-            }
-        }
-        public void OnPostUpdate_set()
-        {
-            // Temporal = new Persona();
-            // Temporal.Id_Persona = int.Parse(Request.Form["Update_OperarioID"]);
-            // Temporal.Nombre = Request.Form["Update_NombreOperario"];
-            // Temporal.Telefono = int.Parse(Request.Form["Update_Telefono"]);
-            // Temporal.Correo = Request.Form["Update_Correo"];
-            // Temporal.ID_Rol = 1;
-            // Temporal.Genero = Request.Form["Update_Genero"];
-            // _repoPersona.UpdatePersona(Temporal);
-            // Message = $"Operario #{Temporal.Id_Persona} Actualizado";
-        }
-        public void OnPostUpdate_get()
-        {
-            var searchID = Request.Form["TempID"];
-            add = int.Parse(Request.Form["add"]);
-            ID_Galpon = int.Parse(Request.Form["ID_Galpon"]);
-            ID_Trabajador = int.Parse(Request.Form["ID_Trabajador"]);
-            //persona = _repoPersona.GetPersona(int.Parse(searchID));
-            galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
-            
-            if (galpon != null)
-            {
-                Message = "Se ha encontrado el operario";
-                updateQueried = true;
-            }
-            else
-            {
-                Message = "No se ha encontrado operario";
-            }
-        }
-        public void OnPostDelete()
-        {
-            searchID = Request.Form["TempID"];
-            persona = _repoPersona.DeletePersona(int.Parse(searchID));
-            if (persona != null && persona.ID_Rol.Equals(1))
-            {
-                Message = "Operarioo eliminado con exito!";
-            }
-            else
-            {
-                Message = "El Operario no existe";
-            }
+            state = 2;
         }
     }
 }

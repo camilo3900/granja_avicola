@@ -1,10 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 namespace GranjaAvicola.App.Domain
 {
-    // Refactorización 
-    /// <summary> <c>Persona</c>
-        /// Referencia al contexto de Paciente
-        /// </summary>
     public class Persona
     {
         public int Id_Persona{get;set;}

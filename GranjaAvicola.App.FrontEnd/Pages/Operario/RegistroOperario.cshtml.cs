@@ -88,7 +88,6 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
             {
                 galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
                 Message[3] = "Operario encontrado!"; 
-                galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
             }
             else
             {
