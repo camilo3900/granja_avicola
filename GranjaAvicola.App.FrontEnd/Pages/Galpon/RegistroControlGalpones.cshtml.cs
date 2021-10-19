@@ -13,7 +13,9 @@ namespace GranjaAvicola.App.FrontEnd.Pages
     {
         private readonly IRepoGalpon _repoGalpon;
         private readonly IRepoGeoreferencias _repoGeoreferencia;
+        private readonly IRepoPersona _repoPersona;
         public Galpon galpon {get; set;}
+        public Persona veterinario {get; set;}
         public Galpon TemporalGalpon {get; set;}
         public Georeferencias georeferencia {get; set;}
         public Georeferencias Temporalgeoref {get; set;}
@@ -23,20 +25,20 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         public bool searchQueried {get; set;} = false;
         public bool UpdateState {get; set;} = false;
 
-        public RegistroControlGalponesModel(IRepoGalpon repoGalpon, IRepoGeoreferencias repoGeoreferencias)
+        public RegistroControlGalponesModel(IRepoGalpon repoGalpon, IRepoGeoreferencias repoGeoreferencias, IRepoPersona repoPersona)
         {
-            _repoGalpon=repoGalpon;
-            _repoGeoreferencia=repoGeoreferencias;
+            _repoGalpon = repoGalpon;
+            _repoGeoreferencia = repoGeoreferencias;
+            _repoPersona = repoPersona;
         }
         public void OnGet()
         {
-            
             galpon = new Galpon();
             georeferencia = new Georeferencias();
         }
         public void OnPost()
         {
-            
+            Message[0] = "Registro";
         }
         public void OnPostCreate()
         {
@@ -55,28 +57,34 @@ namespace GranjaAvicola.App.FrontEnd.Pages
             TemporalGalpon.Georeferencia = Temporalgeoref.Id_Georeferencia;
 
             TemporalGalpon = _repoGalpon.AddGalpon(TemporalGalpon);
-            Message[0] = "Galpon subido con exito";
-            Message[1] = $"ID referencia: {TemporalGalpon.ID_Galpon}";
+            Message[1] = "Galpon subido con exito";
+            Message[2] = $"ID referencia: {TemporalGalpon.ID_Galpon}";
+
             CreateEntry = true;
         }
         public void OnPostRead()
         {
+            veterinario = new Persona();
             searchID = Request.Form["SearchID"];
-            //galpon = new Galpon();
             galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
             searchQueried = true;
             if (galpon == null)
             {
-                Message[2] = "No encontrado";
+                Message[3] = "No encontrado";
             }
             else
             {
                 georeferencia = _repoGeoreferencia.GetGeoreferencia(galpon.Georeferencia);
+                if (galpon.ID_VeterinarioCargo > 0)
+                {
+                    veterinario = _repoPersona.GetPersona(galpon.ID_VeterinarioCargo);
+                }
             }
 
         }
         public void OnPostUpdate_get()
         {
+            Message[0] = "Actualizar"; 
             searchID = Request.Form["TempID"];
             galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
             georeferencia = _repoGeoreferencia.GetGeoreferencia(galpon.Georeferencia);
@@ -85,6 +93,7 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         
         public void OnPostUpdate_set()
         {
+            Message[0] = "Actualizar"; 
             TemporalGalpon = new Galpon();
             Temporalgeoref = new Georeferencias();
 

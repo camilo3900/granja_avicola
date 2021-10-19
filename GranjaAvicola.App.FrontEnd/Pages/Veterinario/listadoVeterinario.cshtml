@@ -2,31 +2,32 @@
 @model GranjaAvicola.App.FrontEnd.Pages.listadoVeterinarioModel
 @{
 }
-<h1>Listado de Veterinarios</h1>
-<a class="btn btn-primary" asp-page="./Create1">Crear Veterinario</a>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var Persona in Model.persona)
-        { 
-            if(Persona.ID_Rol.Equals(2)){
+<div class="Transbox text-center">
+    <h1>Listado de Veterinarios</h1>
+</div>
+
+<div class="Transbox">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@Persona.Nombre</td>
-                <td>@Persona.Apellido</td>
-                <td>@Persona.Telefono</td>
-                <td>@Persona.Correo</td>
-                <td>@Persona.Id_Persona</td>
-                <td><a class="btn btn-secondary" asp-page="./Details1" asp-route-Id="@Persona.Id_Persona">Detalle</a></td>
-                <td><a class="btn btn-secondary" asp-page="./EditPersona" asp-route-Id="@Persona.Id_Persona">Editar</a></td> 
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Correo</th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var Persona in Model.persona)
+            { 
+                if(Persona.ID_Rol.Equals(2)){
+                    <tr>
+                        <td style="text-align: left;">@Persona.Id_Persona</td>
+                        <td style="text-align: left;">@Persona.Nombre @Persona.Apellido</td>
+                        <td style="text-align: left;">@Persona.Telefono</td>
+                        <td style="text-align: left;">@Persona.Correo</td>
+                    </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

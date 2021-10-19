@@ -59,7 +59,7 @@ namespace GranjaAvicola.App.Persistent
             {
                 // DiagnosticoEncontrado.Georeferencia=Diagnostico.Georeferencia;
                 DiagnosticoEncontrado.DiagnosticoVet=Diagnostico.DiagnosticoVet;
-                DiagnosticoEncontrado.Sugerencia = Diagnostico.Sugerencia;
+                //DiagnosticoEncontrado.Sugerencia = Diagnostico.Sugerencia;
 
                 _appContext.SaveChanges();
             }

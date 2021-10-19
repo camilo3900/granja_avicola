@@ -6,7 +6,16 @@ body {
   background: rgba(215, 245, 244, 1) url(Resources/BackgroundPattern.png);
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* odio a firefox :( */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 body::-webkit-scrollbar {
   width: 0.5rem;
@@ -49,6 +58,19 @@ th, td {
 .BoxContainer {
   display: flex;
   align-items: stretch;
+  justify-content: center;
+}
+
+.BoxContainerLine {
+  /*display: flex;*/
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.End{
+  /*display: flex;*/
+  align-items: flex-end;
   justify-content: center;
 }
 

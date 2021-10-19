@@ -4,27 +4,29 @@ using GranjaAvicola.App.Persistent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GranjaAvicola.App.Persistent.Migrations
+namespace GranjaAvicola.App.Persistence.Migrations
 {
-    [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(WebAppContext))]
+    [Migration("20211016204245_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.9");
+                .HasAnnotation("ProductVersion", "5.0.9")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("GranjaAvicola.App.Domain.Diagnostico", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Id_Diagnostico")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DiagnosticoVet")
                         .HasColumnType("nvarchar(max)");
@@ -41,17 +43,17 @@ namespace GranjaAvicola.App.Persistent.Migrations
                     b.Property<string>("Sugerencia")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id_Diagnostico");
 
                     b.ToTable("Diagnostico");
                 });
 
             modelBuilder.Entity("GranjaAvicola.App.Domain.Galpon", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID_Galpon")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FechaIngreso")
                         .HasColumnType("datetime2");
@@ -74,17 +76,17 @@ namespace GranjaAvicola.App.Persistent.Migrations
                     b.Property<int>("NumeroAnimales")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID_Galpon");
 
                     b.ToTable("Galpon");
                 });
 
             modelBuilder.Entity("GranjaAvicola.App.Domain.Georeferencias", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Id_Georeferencia")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("altitud")
                         .HasColumnType("float");
@@ -92,17 +94,17 @@ namespace GranjaAvicola.App.Persistent.Migrations
                     b.Property<double>("latitud")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id_Georeferencia");
 
                     b.ToTable("Georeferencias");
                 });
 
             modelBuilder.Entity("GranjaAvicola.App.Domain.Persona", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Id_Persona")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
                         .HasColumnType("nvarchar(max)");
@@ -110,7 +112,10 @@ namespace GranjaAvicola.App.Persistent.Migrations
                     b.Property<string>("Correo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Genero")
+                    b.Property<string>("Genero")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ID_GalponAsignado")
                         .HasColumnType("int");
 
                     b.Property<int>("ID_Rol")
@@ -119,20 +124,20 @@ namespace GranjaAvicola.App.Persistent.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Telefono")
-                        .HasColumnType("int");
+                    b.Property<long>("Telefono")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id_Persona");
 
                     b.ToTable("Persona");
                 });
 
             modelBuilder.Entity("GranjaAvicola.App.Domain.Registro", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Id_Registro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<double>("Agua")
                         .HasColumnType("float");
@@ -158,22 +163,22 @@ namespace GranjaAvicola.App.Persistent.Migrations
                     b.Property<double>("Temperatura")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id_Registro");
 
                     b.ToTable("Registro");
                 });
 
             modelBuilder.Entity("GranjaAvicola.App.Domain.Rol", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("Id_Rol")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id_Rol");
 
                     b.ToTable("Rol");
                 });

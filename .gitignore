@@ -407,3 +407,7 @@ obj/
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
 *.pdf
+
+temp
+GranjaAvicola.App.Frontend\Pages\test.cshtml
+GranjaAvicola.App.Frontend\Pages\test.cshtml.cs

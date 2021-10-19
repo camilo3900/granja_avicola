@@ -64,6 +64,8 @@ namespace GranjaAvicola.App.Persistent
                 RegistroEncontrado.Alimento=Registro.Alimento;
                 RegistroEncontrado.PromedioHuevos=Registro.PromedioHuevos;
                 RegistroEncontrado.GallinasEnfermas=Registro.GallinasEnfermas;
+                RegistroEncontrado.ID_Galpon=Registro.ID_Galpon;
+                RegistroEncontrado.ID_Trabajador=Registro.ID_Trabajador;
 
                 
 

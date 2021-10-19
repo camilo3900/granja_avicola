@@ -16,14 +16,14 @@
                 <h1 class="display-5">Registro</h1>
             </header>
             <hr>
+            @if (Model.CreateEntry)
+            {                            
+                <h3 class="clearfix">@Model.Message[0]</h3>
+                <p>@Model.Message[1]</p> 
+            }
             <Body>
                 <form asp-page-handler = "create" method="post">
                     <div class="FormContainer">
-                        @if (Model.CreateEntry)
-                        {                            
-                            <h3 class="clearfix">@Model.Message[0]</h3>
-                            <p>@Model.Message[1]</p> 
-                        }
                         <label>Nombre Galpon</label>
                         <input name="NombreGalpon"      autocomplete="off" class="FormInput" placeholder="Nombre">
                         
@@ -188,7 +188,7 @@
                                         <td>Sin Asignar</td>
                                     }else
                                     {
-                                        <td>Xd</td>
+                                        <td>@Model.veterinario.Nombre @Model.veterinario.Apellido</td>
                                     }
                                 </tr>
                             </Table>

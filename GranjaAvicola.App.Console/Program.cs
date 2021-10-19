@@ -18,7 +18,7 @@ namespace GranjaAvicola.App.Console
         {
             System.Console.WriteLine("Hello World!");
             //AddGalpon();
-            //AddPersona();
+            AddPersona();
             //AddDiagnostico();
             //AddRegistro();
             //getGalpon(1);
@@ -27,8 +27,6 @@ namespace GranjaAvicola.App.Console
             {
                 deleteGalpon(i);
             } */
-                deleteGalpon(1021);
-                deleteGalpon(1022);
         }
 
         private static void AddGalpon()
@@ -50,16 +48,16 @@ namespace GranjaAvicola.App.Console
                 Apellido = "Veterinario",
                 Telefono = 3752 ,
                 Correo = "Doc@mintic.com",
-
             };
-            _repoPersona.AddPersona(persona);
+            var person = _repoPersona.AddPersona(persona);
+            getPersona(person.Id_Persona);
         }
         private static void AddDiagnostico()
         {
             var diagnostico = new Diagnostico
             {
                 DiagnosticoVet = "Diagnotico 1.0",
-                Sugerencia = "New Sugerencia"
+                //Sugerencia = "New Sugerencia"
 
 
             };
@@ -87,6 +85,14 @@ namespace GranjaAvicola.App.Console
             }
         }
 
+        private static void getPersona(int id)
+        {
+            var persona = _repoPersona.GetPersona(id);
+            if(persona != null)
+            {
+                System.Console.WriteLine("Galpon encontrado\n"+persona.Nombre + " " + persona.Id_Persona);
+            }
+        }
         private static void deleteGalpon(int idGalpon)
         {
             _repoGalpon.DeleteGalpon(idGalpon);
