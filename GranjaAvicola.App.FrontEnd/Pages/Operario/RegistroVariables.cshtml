@@ -11,7 +11,7 @@
 <div class="BoxContainerLine">
     <div class="Transbox">
         <header>
-            <h1 class="display-5">Busqueda</h1>
+            <h1 class="display-5">Seleccionar Operario</h1>
         </header>
         <hr>
 
@@ -21,8 +21,21 @@
                 <div>
                     <form asp-page-handler="read" method="post">
                         <label for="lolaso" style="padding-right: 1rem;">Buscar Operario</label>
-                        <input name="lolaso"  autocomplete="off" class="FormInput" id="ComboBox" placeholder="-Buscar ID Operario-">
+                        <input name="lolaso" type="text" @*list="SearchGalponID"*@ autocomplete="off" class="FormInput" id="ComboBox"
+                            placeholder="-Buscar ID Operario-">
                             
+
+                        @*<datalist id="SearchGalponID">
+                            <option value="2">2</option>
+                            @* @foreach (var Per in Model.personas)
+                                {
+                                if (Per.ID_Rol.Equals(1))
+                                {
+                                <option value="@Per.Id_Persona">@Per.Nombre</option>
+                                }
+                                } 
+                        </datalist> *@
+
                         <button class="btn btn-outline-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
@@ -99,6 +112,7 @@
                         <form asp-page-handler="readGalpon" method="post">
                             <input type="hidden" name="TemoID" asp-for="persona.ID_GalponAsignado">
                             <input type="hidden" name="search" asp-for="persona.ID_GalponAsignado">
+                            <input type="hidden" name="ID_Trabajador" asp-for="persona.Id_Persona">
                             <button class="btn btn-outline-secondary">
                                 Lista de Variables  
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -190,7 +204,7 @@ else
 
     <div class="Transbox">
         <header>
-            <h1 class="display-5">Busqueda</h1>
+            <h1 class="display-5">Lista Variable</h1>
         </header>
         <hr>
 
@@ -201,37 +215,61 @@ else
 
                 @if (Model.searchQueried2)
                 {
-                    <div style="margin-bottom: 2rem;">
-                        <Table class="infoTable">
+                    <h3 class="clearfix">@Model.Message</h3>
 
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID </th>
-                                    <th scope="col">Temperatura </th>
-                                    <th scope="col">Agua</th>
-                                    <th scope="col">Alimento</th>
-                                    <th scope="col">Promedio Huevos</th>
-                                    <th scope="col">Gallinas Enfermas</th>
-                                    <th scope="col">Fecha Registro</th>
-                                    <th scope="col">ID Trabajador</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    
+                    @if (@Model.request == false)
+                    {
+                        <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS"
+                style="width:700px;height:500px;">
+                    }
+                    else
+                    {
+                        
 
-                                @foreach (var Per in Model.registros)
-                                {
-                                    if (Per.ID_Galpon.Equals(@Model.galpon.ID_Galpon))
-                                    {   
-                                        <tr>
-                                            <td style="text-align: left;">@Per.Id_Registro </td>
-                                            <td style="text-align: left;">@Per.Temperatura </td>
-                                            <td style="text-align: left;">@Per.Agua</td>
-                                            <td style="text-align: left;">@Per.Alimento</td>
-                                            <td style="text-align: left;">@Per.PromedioHuevos</td>
-                                            <td style="text-align: left;">@Per.GallinasEnfermas</td>
-                                            <td style="text-align: left;">@Per.FechaRegistro</td>
-                                            <td style="text-align: left;">@Per.ID_Trabajador</td>
-                                        </tr>
+                        <div style="margin-bottom: 2rem;">
+                            <Table class="infoTable">
+
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID </th>
+                                        <th scope="col">Temperatura </th>
+                                        <th scope="col">Agua</th>
+                                        <th scope="col">Alimento</th>
+                                        <th scope="col">Promedio Huevos</th>
+                                        <th scope="col">Gallinas Enfermas</th>
+                                        <th scope="col">Fecha Registro</th>
+                                        <th scope="col">ID Trabajador</th>
+
+
+
+
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var Per in Model.registros)
+                                    {
+                                        if (Per.ID_Galpon.Equals(@Model.galpon.ID_Galpon))
+                                        {   
+                                            @*
+                                            Hacer responsive
+                                             *@
+                                            <tr>
+                                                <td style="text-align: left;">@Per.Id_Registro </td>
+                                                <td style="text-align: left;">@Per.Temperatura </td>
+                                                <td style="text-align: left;">@Per.Agua</td>
+                                                <td style="text-align: left;">@Per.Alimento</td>
+                                                <td style="text-align: left;">@Per.PromedioHuevos</td>
+                                                <td style="text-align: left;">@Per.GallinasEnfermas</td>
+                                                <td style="text-align: left;">@Per.FechaRegistro</td>
+                                                <td style="text-align: left;">@Per.ID_Trabajador</td>
+                                                
+
+                                            </tr>
+                                        }
+                                        
                                     }
                                 }
                             </tbody>

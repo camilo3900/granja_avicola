@@ -33,6 +33,8 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         public bool CreateEntry {get;set;} = false;
         public bool updateQueried {get; set;} = false;
         public bool upload {get; set;} = false;
+        public bool request {get; set;} = false;
+
          
 
         public RegistroVariablesModel(IRepoPersona repoPersona, IRepoGalpon repoGalpon, IRepoRegistro repoRegistro)
@@ -107,12 +109,20 @@ namespace GranjaAvicola.App.FrontEnd.Pages
             registros = _repoRegistro.GetAllRegistro();
 
             search = int.Parse(Request.Form["search"]);
+            ID_Trabajador = int.Parse(Request.Form["ID_Trabajador"]);
             
             searchQueried2 = true;
+            persona = _repoPersona.GetPersona(ID_Trabajador);
             
             //galpon = new Galpon();
+            foreach (var Per in registros){
+                if(persona.ID_GalponAsignado.Equals(Per.ID_Galpon))
+                {
+                    request = true;
+                }        
+            }
             
-            persona = _repoPersona.GetPersona(1);
+            
             
             
            
