@@ -38,7 +38,7 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         }
         public void OnPost()
         {
-            
+            Message[0] = "Registro";
         }
         public void OnPostCreate()
         {
@@ -57,8 +57,8 @@ namespace GranjaAvicola.App.FrontEnd.Pages
             TemporalGalpon.Georeferencia = Temporalgeoref.Id_Georeferencia;
 
             TemporalGalpon = _repoGalpon.AddGalpon(TemporalGalpon);
-            Message[0] = "Galpon subido con exito";
-            Message[1] = $"ID referencia: {TemporalGalpon.ID_Galpon}";
+            Message[1] = "Galpon subido con exito";
+            Message[2] = $"ID referencia: {TemporalGalpon.ID_Galpon}";
 
             CreateEntry = true;
         }
@@ -70,7 +70,7 @@ namespace GranjaAvicola.App.FrontEnd.Pages
             searchQueried = true;
             if (galpon == null)
             {
-                Message[2] = "No encontrado";
+                Message[3] = "No encontrado";
             }
             else
             {
@@ -84,6 +84,7 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         }
         public void OnPostUpdate_get()
         {
+            Message[0] = "Actualizar"; 
             searchID = Request.Form["TempID"];
             galpon = _repoGalpon.GetGalpon(int.Parse(searchID));
             georeferencia = _repoGeoreferencia.GetGeoreferencia(galpon.Georeferencia);
@@ -92,6 +93,7 @@ namespace GranjaAvicola.App.FrontEnd.Pages
         
         public void OnPostUpdate_set()
         {
+            Message[0] = "Actualizar"; 
             TemporalGalpon = new Galpon();
             Temporalgeoref = new Georeferencias();
 

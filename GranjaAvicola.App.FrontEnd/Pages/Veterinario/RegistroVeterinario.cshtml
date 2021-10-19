@@ -3,29 +3,30 @@
 @{
     <title>@ViewData["Title"]Veterinarios</title>
 }
-@* Titulo *@
+
 <div class="Transbox text-center" style="padding: 10px;">
     <h1 class="display-5"> Registro Veterinario </h1>
 </div>
-@* Un div pa meterle las 2 columnas *@
+
 <div class="BoxContainer">
 
     <div class="Transbox">
+        <header>
+            <h1 class="display-5">@Model.Message[0]</h1>
+        </header>
+        <hr>
+        
+        @if (Model.CreateEntry || Model.UpdateEntry)
+        {
+            <h3 class="clearfix">@Model.Message[1]</h3>
+            <p>@Model.Message[2]</p> 
+        }
+
         @if (!Model.UpdateState)
         {
-            <header>
-                <h1 class="display-5">Registro</h1>
-            </header>
-            <hr>
-
             <Body>
                 <form asp-page-handler="create" method="post">
                     <div class="FormContainer">
-                        @if (Model.CreateEntry)
-                        {                            
-                            <h3 class="clearfix">@Model.Message[0]</h3>
-                            <p>@Model.Message[1]</p> 
-                        }
 
                         <label>Nombre</label>
                         <input name="NombreVet"     class="FormInput" autocomplete="off" placeholder="Nombre">
@@ -73,36 +74,54 @@
         }
         else
         {
-            <header>
-                <h1 class="display-5">Actualizar</h1>
-            </header>
-            <hr>
             <Body>
-                <form asp-page-handler = "Update_set" method="post">
+                <form asp-page-handler="Update_set" method="post">
                     <div class="FormContainer">
 
-                        <label>ID Persona</label>
-                        <input name="Update_VeterinarioID"   asp-for="persona.Id_Persona" autocomplete="off" class="FormInput" placeholder="ID" readonly>
+                        <label>ID Veterinario</label>
+                        <input name="Update_VeterinarioID"  class="FormInput" autocomplete="off" placeholder="Nombre" readonly asp-for="persona.Id_Persona">
                         
-                        <label>Nombre Veterinario</label>
-                        <input name="Update_NombreVeterinario"      asp-for="persona.Nombre" autocomplete="off" class="FormInput" placeholder="Nombre">
+                        <label>Nombre</label>
+                        <input name="Update_NombreVet"      class="FormInput" autocomplete="off" placeholder="Nombre" asp-for="persona.Nombre">
                         
+                        <label>Apellidos</label>
+                        <input name="Update_ApellidoVet"    class="FormInput" autocomplete="off" placeholder="Apellidos" asp-for="persona.Apellido">
+
+                        <label>Genero</label>
+                        <select name="Update_GeneroVet"     class="FormInput"  asp-for="persona.Genero">
+                            <option value="Masculino">      Masculino   </option>
+                            <option value="Femenino">       Femenino    </option>
+                            <option value="Bisexual">       Bisexual    </option>
+                            <option value="Intersexual">    Intersexual </option>
+                            <option value="Pansexual">      Pansexual   </option>
+                            <option value="Transexual">     Transexual  </option>
+                        </select>
+
                         <label>Telefono</label>
-                        <input name="Update_Telefono"    asp-for="persona.Telefono" autocomplete="off" class="FormInput" placeholder="0" type="number">
-                        
+                        <input name="Update_TelefonoVet"   class="FormInput" autocomplete="off" placeholder="000 000 0000" asp-for="persona.Telefono">
+
                         <label>Correo</label>
-                        <input name="Update_Correo"      asp-for="persona.Correo" autocomplete="off" class="FormInput" placeholder="Ejemplo@correo.com" type="email">
-                        
+                        <input name="Update_EmailVet"      class="FormInput" autocomplete="off" placeholder="Ejemplo@email.com" type="email" asp-for="persona.Correo">
                     </div>
-                    
+
+                        <hr>
+
+                    <div class="FormContainer">
+                        <label>Id Galpon a cargo</label>
+                        <input name="Update_IDCargo"   class="FormInput" autocomplete="off" placeholder="Id Galpon" asp-for="persona.ID_GalponAsignado">
+                    </div>
+
                     <button class="btn btn-outline-secondary">
-                        Actualizar 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                        Registrar
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                            <path fill-rule="evenodd"
+                                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
                         </svg>
                     </button>
                 </form>
-                <a href="./RegistroVeterinario">Volver</a>
             </Body>
         }
 
@@ -119,9 +138,7 @@
             <h1 class="display-5">Busqueda</h1>
         </header>
         <hr>
-
         <body>
-
             <div class="FormContainer">
                 <div>
                     <form asp-page-handler="read" method="post">
@@ -144,49 +161,57 @@
                     <h3 class="clearfix">@Model.Message[0]</h3>
                     @if (Model.persona == null || Model.persona.ID_Rol.Equals(1))
                     {
-                        <img src="https://i.ytimg.com/vi/HR7L_mOsa80/maxresdefault.jpg" alt="GODDAMMIT KRISS"
-                    style="width:700px;height:500px;">
+                        <h3 class="clearfix">@Model.Message[3]</h3>
                     }
                     else
                     {
-                        if (Model.persona.ID_Rol.Equals(2))
-                        {
-                            <div style="margin-bottom: 2rem;">
-                                <Table class="infoTable">
-                                    <tr>
-                                        <th>Nombres:</th>
-                                        <td id="OperarioNombre">@Model.persona.Nombre</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Telefono:</th>
-                                        <td id="OperarioTelefono">@Model.persona.Telefono</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Genero:</th>
-                                        <td id="OperarioGenero">@Model.persona.Genero</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Correo:</th>
-                                        <td id="OperarioTelefono">@Model.persona.Correo</td>
-                                    </tr>
+                        <div style="margin-bottom: 2rem;">
+                            <Table class="infoTable">
+                                <tr>
+                                    <th>Nombres:</th>
+                                    <td>@Model.persona.Nombre @Model.persona.Apellido</td>
+                                </tr>
+                                <tr>
+                                    <th>Telefono:</th>
+                                    <td>@Model.persona.Telefono</td>
+                                </tr>
+                                <tr>
+                                    <th>Genero:</th>
+                                    <td>@Model.persona.Genero</td>
+                                </tr>
+                                <tr>
+                                    <th>Correo:</th>
+                                    <td>@Model.persona.Correo</td>
+                                </tr>
+                                @if (Model.persona.ID_GalponAsignado == 0)
+                                {
                                     <tr style="border-top: 3px solid #aaaaaa;">
                                         <th>ID Galpón Asignado:</th>
-                                        <td id="GalponAsignado">@Model.galpon.ID_Galpon</td>
+                                        <td>Sin asignar</td>
                                     </tr>
                                     <tr>
                                         <th>Nombre Galpón:</th>
-                                        <td id="GalponNombre">@Model.galpon.Nombre</td>
+                                        <td>Sin asignar</td>
                                     </tr>
-                                </Table>
-                            </div>
-
-                        }
+                                } 
+                                else
+                                {
+                                    <tr style="border-top: 3px solid #aaaaaa;">
+                                        <th>ID Galpón Asignado:</th>
+                                        <td>@Model.persona.ID_GalponAsignado</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre Galpón:</th>
+                                        <td>@Model.galpon.Nombre</td>
+                                    </tr>
+                                }
+                            </Table>
+                        </div>
                     }
                 }
 
-
                 <div style="display: flex; justify-content: space-around;">
-                    @if (Model.persona != null && Model.searchQueried)
+                    @if (Model.persona != null && Model.searchQueried && Model.persona.ID_Rol == 2)
                     {
                         <form asp-page-handler="Update_get" method="post">
                             <input type="hidden" name="TempID" asp-for="persona.Id_Persona">

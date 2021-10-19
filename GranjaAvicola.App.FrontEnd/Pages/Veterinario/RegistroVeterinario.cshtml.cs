@@ -72,19 +72,21 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         }
         public void OnPostRead()
         {
+            galpon = new Galpon();
             searchID = Request.Form["SearchID"];
-            searchQueried = true;
             persona = _repoPersona.GetPersona(int.Parse(searchID));
            
             if (persona != null && persona.ID_Rol.Equals(2))
             {
+                galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
                 Message[0] = "Veterinario encontrado!"; 
                 galpon = _repoGalpon.GetGalpon(persona.ID_GalponAsignado);
             }
             else
             {
-                Message[0] = "GOD FUCKING DAMMIT KRIS WHERE THE FUCK ARE WE!?";
+                Message[0] = "Galpon no encontrado.";
             }
+            searchQueried = true;
         }
         public void OnPostUpdate_set()
         {
@@ -102,16 +104,7 @@ namespace  GranjaAvicola.App.FrontEnd.Pages
         {
             var searchID = Request.Form["TempID"];
             persona = _repoPersona.GetPersona(int.Parse(searchID));
-            
-            if (persona != null && persona.ID_Rol.Equals(2))
-            {
-                Message[0] = "Se ha encontrado el veterinario";
-                UpdateState = true;
-            }
-            else
-            {
-                Message[0] = "No se ha encontrado veterinario";
-            }
+            UpdateState = true;
         }
         public void OnPostDelete()
         {
